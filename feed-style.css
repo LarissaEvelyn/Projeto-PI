@@ -10,7 +10,7 @@ body {
 .container {
     max-width: 900px;
     margin: auto;
-    background: rgba(0, 0, 0, 0.795);
+    background: rgba(0, 0, 0, 0.651);
     border-radius: 15px;
     padding: 15px;
 }
