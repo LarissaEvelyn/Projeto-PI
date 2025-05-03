@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed / Search Academy</title>
+    <link rel="shortcut icon" href="./Assets/logo-icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="feed.css">
+</head>
+<body>
+    <!-- Header da Página Inicial -->
+    <header>
+        <h1>Search Academy</h1>
+        <div class="search-bar">
+            <button>🔍</button>
+            <input type="text" placeholder="Qual atividade você procura?">
+            <div class="profile-pic">
+                <img class="userpic" src="person-circle.svg" alt="Foto Usuário">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+       
+        <div class="feed">
+            <div class="header">
+                <h2>Feed</h2>
+            </div>
+            <!-- Botão de Publicar Postagem -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button onclick="mostrarFormulario()">+ Nova Postagem</button>
+            </div>
+            <!-- Publicar Postagem -->
+            <div id="formularioPostagem" style="display: none; margin-bottom: 20px;">
+                <textarea id="novaPostagemTexto" rows="4" placeholder="Escreva sua postagem..." style="width: 100%; border-radius: 10px; padding: 10px;"></textarea>
+                <br>
+                <button onclick="adicionarPostagem()">Publicar</button>
+            </div>
+
+            <!-- Post 1 -->
+            <div class="post">
+                <div>
+                    <span class="username">@rosamar1a</span>
+                    <span class="timestamp">1h atrás</span>
+                </div>
+                <div class="post-content">
+                    A ONHB foi a melhor olimpíada que participei!! 🌟
+                </div>
+                <div class="actions">
+                    <button>Curtir</button>
+                    <button>Comentar</button>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="post">
+                <div>
+                    <span class="username">@larabaralho</span>
+                    <span class="timestamp">30min atrás</span>
+                </div>
+                <div class="post-content">
+                    Esse site é incrível, já me inscrevi em várias atividades.
+                </div>
+                <div class="actions">
+                    <button>Curtir</button>
+                    <button>Comentar</button>
+                </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="post">
+                <div>
+                    <span class="username">@noahschwap</span>
+                    <span class="timestamp">10min atrás</span>
+                </div>
+                <div class="post-content">
+                    Definitivamente programação não é pra mim 😵‍💫😅
+                </div>
+                <div class="actions">
+                    <button>Curtir</button>
+                    <button>Comentar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="feed.js"></script>
+</body>
+</html>
