@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #b838def1, #9b31e7);
+    color: white;
+}
+
+header {
+    background-color: #aee0fa;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+header h1 {
+    margin: 0;
+    color: #00008B;
+    font-size: 24px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.search-bar button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.feed {
+    background: linear-gradient(to bottom, #2b0b3d, #4b0082);
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.header h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.post {
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.post:hover {
+    background-color: rgba(50, 40, 40, 1);
+    transform: scale(1.015);
+}
+
+.username {
+    font-weight: bold;
+    color: #00bfff;
+    font-size: 1.1rem;
+}
+
+.timestamp {
+    float: right;
+    font-size: 0.9rem;
+    color: #cccccc;
+}
+
+.post-content {
+    margin: 12px 0;
+    color: white;
+    font-size: 1rem;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #87cefa;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #add8e6;
+}
