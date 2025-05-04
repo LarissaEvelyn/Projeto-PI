@@ -4,10 +4,11 @@ function mostrarFormulario() {
 }
 
 function adicionarPostagem() {
+    //Pega conteúdo da caixa de testo e tira espaços desnecessários
     const texto = document.getElementById("novaPostagemTexto").value.trim();
     if (!texto) return; //Esta linha vê se a mensagem esta vazia, similar aom (texto == "")
 
-    const feed = document.querySelector(".feed");
+    const feed = document.querySelector(".feed"); //div onde estão as postagens
 
     const postHTML = `
         <div class="post">
