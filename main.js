@@ -1,18 +1,18 @@
-import { login } from './pag1.js';
+import { login as logins } from './pag1.js';
 
-const form = document.querySelector('#investment-form');
+const form = document.querySelector('form');
 
 form.onsubmit = function (event) {
-  event.preventDefault();
-  const senha = document.getElementById('senha').value
-  const email = document.getElementById('email').value
+    event.preventDefault();
+    const senha = document.getElementById('senha').value
+    const email = document.getElementById('email').value
 
-  for (const user of users) {
-    if (user.email === email && user.senha === senha) {
-        location.href = "html3"
-    } else {
-        alert('Usuário ou senha inválidas');
+    for (const login of logins) {
+        console.log(senha,email,login.email,login.senha)
+        if (login.email == email && login.senha == senha) {
+            alert("Bem-vindo");
+        }
     }
-}
+    alert('Usuário ou senha inválidas');
 
 }
