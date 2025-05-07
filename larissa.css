@@ -200,5 +200,36 @@ body {
   .Academy{
       color: #000;
   }
+
+  .quadrado-com-botao {
+    width: 600px;
+    height: 450px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .botao {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #06ccc2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .botao:hover {
+    background-color: #048f8a;
+  }
   
