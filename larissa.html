@@ -3,132 +3,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Academy</title>
-    <style>
-
-
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #06ccc2, #c273fd);
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            width: 100%;
-            background: #87ceeb;
-            padding: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 25px;
-            font-weight: bold;
-        }
-        .search-bar {
-            flex-grow: 1;
-            margin: 0 40px;
-        }
-        .search-bar input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-        }
-        .icons {
-            display: flex;
-            gap: 15px;
-        }
-        .menu {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            background: #dcdcdc;
-            padding: 20px;
-        }
-        .menu button {
-            background: #87ceeb;
-            border: none;
-            padding: 10px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .content {
-            max-width: 1500px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 20px;
-            gap: 200px;
-        }
-
-
-        .carousel {
-            flex:1;
-            justify-content: center;
-            width: 50%;
-            text-align: center;
-        }
-
-
-        .feed {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-            background: #dcdcdc;
-            padding: 130px;
-            border-radius: 10px;
-       
-        }
-        .feed a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
-
-
-        #carousel-img {
-            width: 600px;
-            flex: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="larissa.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <h1>Search <span style="color: black;">Academy</span></h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Qual atividade você procura?">
-        </div>
-        <div class="icons">
-            <button>🔔</button>
-            <button>👤</button>
-        </div>
+    <header>
+    <div class="lobster-regular">
+      <span class="Search">Search</span> <span class="Academy">Academy</span>
     </div>
-    <div class="menu">
-        <button>Voluntariado</button>
-        <button>Olimpíadas</button>
-        <button>Projetos de extensão</button>
-        <button>Eventos</button>
-        <button>Estágios</button>
-        <button>Cursos</button>
-        <button>Palestras</button>
-        <button>Esportes</button>
+    <div class="search-bar">
+      <span class="stash--search-solid"></span>
+      <input type="text" placeholder="Qual atividade você procura?" />
     </div>
-    <div class="content">
-        <div class="carousel">
-            <img id="carousel-img" src="https://images.pexels.com/photos/6344238/pexels-photo-6344238.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-        </div>
-        <div class="feed">
-            <h2>FEED</h2>
-            <p>Postagem:</p>
-            <a href="#">Veja mais</a>
-        </div>
+    <div class="icons">
+      <button class="icon-button" onclick="alert('Perfil')"><span class="mingcute--user-4-fill"></span></button>
+      <button class="icon-button" onclick="alert('Notificações')"><span class="mingcute--notification-line"></span></button>
     </div>
+  </header>
+  <main>
+    <section class="categories">
+      <div class="category" onclick="window.location.href='olimpiadas.html'"><span class="olimpiadas--icon"></span><span>Olimpíadas</span></div>
+      <div class="category" onclick="window.location.href='extensao.html'"><span class="projeto--extensao-icon"></span><span>Projetos de Extensão</span></div>
+      <div class="category" onclick="window.location.href='pesquisa.html'"><span class="projeto--pesquisa-icon"></span><span>Projetos de Pesquisa</span></div>
+      <div class="category" onclick="window.location.href='eventos.html'"><span class="evento-icon"></span><span>Eventos</span></div>
+      <div class="category" onclick="window.location.href='estagios.html'"><span class="estagio-icon"></span><span>Estágios</span></div>
+      <div class="category" onclick="window.location.href='cursos.html'"><span class="curso-icon"></span><span>Cursos</span></div>
+      <div class="category" onclick="window.location.href='palestras.html'"><span class="palestras-icon"></span><span>Palestras</span></div>
+      <div class="category" onclick="window.location.href='esportes.html'"><span class="esportes-icon"></span><span>Esportes</span></div>
+    </section>
+  </main>
 
 
 

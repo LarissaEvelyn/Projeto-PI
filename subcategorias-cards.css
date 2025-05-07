@@ -1,0 +1,265 @@
+body {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 2rem;
+    font-style:normal;
+    background-color:rgb(101, 209, 245);
+    margin: 0px
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(173, 216, 230);
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    padding: 15px 10px;
+    width: 300px;
+  }
+  
+  .search-bar input {
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 5px;
+  }
+  
+  .icons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .icon-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s;
+  }
+  
+  .icon-button:hover {
+    transform: scale(1.2);
+  }
+  
+  .categories {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 0 20px;
+    scroll-behavior: smooth;
+  }
+  
+  .category {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    width: 150px;
+    height: 100px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-size: 32px;
+    transition: transform 0.3s;
+  }
+  
+  .category:hover {
+    transform: scale(1.05);
+  }
+  
+  .category span {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+    padding: 20px;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+    height: 100%;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    flex-grow: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-description {
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    flex-grow: 1;
+  }
+  
+  .card button {
+    width: 100%;
+    padding: 15px;
+    background-color: #4e27dbe0;
+    color: white;
+    border: none;
+    border-radius: 0 0 20px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .card button:hover {
+    background-color: #e438e4;
+  }
+  .voluntariado--icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23757f83' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M17 19.5c0-1.657-2.239-3-5-3s-5 1.343-5 3m14-3c0-1.23-1.234-2.287-3-2.75M3 16.5c0-1.23 1.234-2.287 3-2.75m12-4.014a3 3 0 1 0-4-4.472M6 9.736a3 3 0 0 1 4-4.472m2 8.236a3 3 0 1 1 0-6a3 3 0 0 1 0 6'/%3E%3C/svg%3E");
+  }
+  .olimpiadas--icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2048 2048'%3E%3Cpath fill='%23757f83' d='M2048 256q0 67-20 120t-56 109l-516 775q39 62 59 132t21 144q0 106-40 199t-109 163t-163 110t-200 40t-199-40t-163-109t-110-163t-40-200q0-73 20-143t60-133L76 485q-36-55-56-108T0 256q0-53 20-99t55-82t81-55T256 0h1536q53 0 99 20t82 55t55 81t20 100m-472-128H472l170 256h764zM728 512l296 445l296-445zM128 256q0 46 14 82t39 74l498 746q51-47 112-78t131-46L318 128h-62q-27 0-50 10t-40 27t-28 41t-10 50m896 1664q79 0 149-30t122-82t83-122t30-150q0-79-30-149t-82-122t-123-83t-149-30q-80 0-149 30t-122 82t-83 123t-30 149q0 80 30 149t82 122t122 83t150 30m844-1510q25-34 38-73t14-81q0-27-10-50t-27-40t-41-28t-50-10h-62l-604 906q69 14 130 45t113 79l499-747z'/%3E%3C/svg%3E");
+  }
+  .projeto--extensao-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23757f83' stroke-width='4'%3E%3Ccircle cx='10' cy='24' r='4'/%3E%3Ccircle cx='38' cy='10' r='4'/%3E%3Ccircle cx='38' cy='24' r='4'/%3E%3Ccircle cx='38' cy='38' r='4'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M34 38H22V10h12M14 24h20'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .projeto--pesquisa-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23757f83' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 15a4 4 0 1 0 8 0a4 4 0 1 0-8 0m7.5 3.5L21 21M4 6h16M4 12h4m-4 6h4'/%3E%3C/svg%3E");
+  }
+  .evento-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23757f83' d='M14.5 18q-1.05 0-1.775-.725T12 15.5t.725-1.775T14.5 13t1.775.725T17 15.5t-.725 1.775T14.5 18M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V3q0-.425.288-.712T7 2t.713.288T8 3v1h8V3q0-.425.288-.712T17 2t.713.288T18 3v1h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z'/%3E%3C/svg%3E");
+  }
+  .estagio-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23757f83' d='M14 6V4h-4v2zM4 9v9c0 .55.45 1 1 1h14c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1m16-3c1.11 0 2 .89 2 2v11c0 1.11-.89 2-2 2H4c-1.11 0-2-.89-2-2l.01-11c0-1.11.88-2 1.99-2h4V4c0-1.11.89-2 2-2h4c1.11 0 2 .89 2 2v2z'/%3E%3C/svg%3E");
+  }
+  .curso-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%23757f83' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M22 9L12 5L2 9l10 4zv6'/%3E%3Cpath d='M6 10.6V16a6 3 0 0 0 12 0v-5.4'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .palestras-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cg fill='none' stroke='%23757f83' stroke-linecap='round' stroke-linejoin='round' stroke-width='1'%3E%3Cpath d='M6.35.5h6.302c.469 0 .849.38.849.849v6.778c0 .47-.38.85-.849.85H7.5M3.149 4.001a1.75 1.75 0 1 0 0-3.501a1.75 1.75 0 0 0 0 3.501'/%3E%3Cpath d='M9 5.527C9 4.96 8.54 4.5 7.973 4.5H3.149v0A2.65 2.65 0 0 0 .5 7.149V9.5h1.135l.379 4h2.27l.872-6.945h2.817C8.54 6.555 9 6.095 9 5.527'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .esportes-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2048 2048'%3E%3Cpath fill='%23757f83' d='m621 1171l256 256l-90 90l-256-256zM1216 0q115 0 221 29t199 84t168 130t130 168t84 199t30 222q0 146-48 279t-134 241t-206 184t-261 108q9 74 9 148q0 53-20 99t-55 82t-81 55t-100 20q-159 0-306-41t-276-116t-233-180t-180-233t-116-275T0 896q0-53 20-99t55-82t81-55t100-20q74 0 148 9q32-142 108-261t184-205T937 48t279-48m354 569q48 35 105 53t117 18q50 0 98-12q-20-68-54-130t-79-116zm96-278q-54-45-116-79t-130-54q-12 48-12 98q0 60 18 117t53 105zm-371-158q-20-3-39-4t-40-1q-124 0-239 42T766 292l450 450l172-172q-53-67-80-147t-28-167q0-63 15-123M675 382q-53 63-90 136t-55 155q137 32 263 99t231 161l102-101zm477 1538q27 0 50-10t40-27t28-41t10-50q0-141-36-272t-104-244t-160-207t-207-161t-245-103t-272-37q-27 0-50 10t-40 27t-28 41t-10 50q0 141 36 272t104 244t160 207t207 161t245 103t272 37m-37-896q94 105 161 231t99 263q81-18 154-55t137-90l-450-451zm641 258q79-95 121-210t43-240q0-20-1-39t-4-40q-60 15-123 15q-86 0-166-27t-148-81l-172 172z'/%3E%3C/svg%3E");
+  }
+  .mingcute--user-4-fill {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z'/%3E%3Cpath fill='%23fafafa' d='M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2M8.5 9.5a3.5 3.5 0 1 1 7 0a3.5 3.5 0 0 1-7 0m9.758 7.484A7.99 7.99 0 0 1 12 20a7.99 7.99 0 0 1-6.258-3.016C7.363 15.821 9.575 15 12 15s4.637.821 6.258 1.984'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .mingcute--notification-line {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z'/%3E%3Cpath fill='%23fedd1b' d='M5 9a7 7 0 0 1 14 0v3.764l1.822 3.644A1.1 1.1 0 0 1 19.838 18h-3.964a4.002 4.002 0 0 1-7.748 0H4.162a1.1 1.1 0 0 1-.984-1.592L5 12.764zm5.268 9a2 2 0 0 0 3.464 0zM12 4a5 5 0 0 0-5 5v3.764a2 2 0 0 1-.211.894L5.619 16h12.763l-1.17-2.342a2 2 0 0 1-.212-.894V9a5 5 0 0 0-5-5'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .stash--search-solid {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23817c7c' fill-rule='evenodd' d='M10.44 2.75a7.69 7.69 0 1 0 4.615 13.842c.058.17.154.329.29.464l3.84 3.84a1.21 1.21 0 0 0 1.71-1.712l-3.84-3.84a1.2 1.2 0 0 0-.463-.289A7.69 7.69 0 0 0 10.44 2.75m-5.75 7.69a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0' clip-rule='evenodd'/%3E%3C/svg%3E");
+  }
+  .lobster-regular {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+  }
+  .Search {
+    color: #0097b2; 
+  }
+  .Academy{
+      color: #000;
+  }
+  
