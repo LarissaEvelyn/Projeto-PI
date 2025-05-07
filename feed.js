@@ -25,7 +25,7 @@ function adicionarPostagem() {
     `;
 
     // Adiciona no topo
-    feed.innerHTML = postHTML + feed.innerHTML; 
+    feed.innerHTML += postHTML; 
     // Limpa o campo
     document.getElementById("novaPostagemTexto").value = ""; 
     // Esconde o Display
