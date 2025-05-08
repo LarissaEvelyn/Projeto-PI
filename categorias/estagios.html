@@ -4,49 +4,57 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Search Academy</title>
-  <link rel="stylesheet" href="subcategorias-cards.css" />
+  <link rel="stylesheet" href="categorias.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header>
-  <a href="../tela inicial/tela_inical.html" class="lobster-regular">
-      <div class="lobster-regular">
-        <span class="Search">Search</span> <span class="Academy">Academy</span>
-      </div>
+  <a href="index.html" class="lobster-regular">
+    <div class="lobster-regular">
+      <span class="Search">Search</span> <span class="Academy">Academy</span>
+    </div>
   </a>
+  <div class="search-bar">
+    <span class="stash--search-solid"></span>
+    <input type="text" placeholder="Qual atividade você procura?" />
+  </div>
   <div class="icons">
     <button class="icon-button" onclick="alert('Perfil')"><span class="mingcute--user-4-fill"></span></button>
     <button class="icon-button" onclick="alert('Notificações')"><span class="mingcute--notification-line"></span></button>
   </div>
 </header>
 
-<section class="categories">
-  <div class="category" onclick="window.location.href='voluntariado.html'"><span class="voluntariado--icon"></span><span>Voluntariado/span></div>
-  <div class="category" onclick="window.location.href='olimpiadas.html'"><span class="olimpiadas--icon"></span><span>Olimpíadas</span></div>
-  <div class="category" onclick="window.location.href='extensao.html'"><span class="projeto--extensao-icon"></span><span>Projetos de Extensão</span></div>
-  <div class="category" onclick="window.location.href='pesquisa.html'"><span class="projeto--pesquisa-icon"></span><span>Projetos de Pesquisa</span></div>
-  <div class="category" onclick="window.location.href='eventos.html'"><span class="evento-icon"></span><span>Eventos</span></div>
-  <div class="category" onclick="window.location.href='estagios.html'"><span class="estagio-icon"></span><span>Estágios</span></div>
-  <div class="category" onclick="window.location.href='cursos.html'"><span class="curso-icon"></span><span>Cursos</span></div>
-  <div class="category" onclick="window.location.href='palestras.html'"><span class="palestras-icon"></span><span>Palestras</span></div>
-  <div class="category" onclick="window.location.href='esportes.html'"><span class="esportes-icon"></span><span>Esportes</span></div>
-</section>
+<div class="category-wrapper">
+  <button class="scroll-btn left" onclick="scrollCategories(-1)">&#8249;</button>
+
+  <div class="category-container" id="categoryContainer">
+    <div class="category" onclick="window.location.href='olimpiadas.html'"><span class="olimpiadas--icon"></span><span>Olimpíadas</span></div>
+    <div class="category" onclick="window.location.href='extensao.html'"><span class="projeto--extensao-icon"></span><span>Projetos de Extensão</span></div>
+    <div class="category" onclick="window.location.href='pesquisa.html'"><span class="projeto--pesquisa-icon"></span><span>Projetos de Pesquisa</span></div>
+    <div class="category" onclick="window.location.href='eventos.html'"><span class="evento-icon"></span><span>Eventos</span></div>
+    <div class="category" onclick="window.location.href='estagios.html'"><span class="estagio-icon"></span><span>Estágios</span></div>
+    <div class="category" onclick="window.location.href='cursos.html'"><span class="curso-icon"></span><span>Cursos</span></div>
+    <div class="category" onclick="window.location.href='palestras.html'"><span class="palestras-icon"></span><span>Palestras</span></div>
+    <div class="category" onclick="window.location.href='esportes.html'"><span class="esportes-icon"></span><span>Esportes</span></div>
+  </div>
+
+  <button class="scroll-btn right" onclick="scrollCategories(1)">&#8250;</button>
+</div>
 
 <section class="cards">
   <div class="card">
     <img src="https://via.placeholder.com/300x200" alt="Imagem" />
     <div class="card-content">
-      <div class="card-title">sexta</div>
+      <div class="card-title">quinto</div>
       <div class="card-description">Ajude a preservar o meio ambiente participando de ações de limpeza e reflorestamento.</div>
     </div>
     <button onclick="window.location.href='https://example.com/detalhes1'">SAIBA MAIS!</button>
   </div>
+
   <div class="card">
     <img src="https://via.placeholder.com/300x200" alt="Imagem" />
     <div class="card-content">
@@ -55,6 +63,7 @@
     </div>
     <button onclick="window.location.href='https://example.com/detalhes2'">SAIBA MAIS!</button>
   </div>
+
   <div class="card">
     <img src="https://via.placeholder.com/300x200" alt="Imagem" />
     <div class="card-content">
@@ -63,6 +72,7 @@
     </div>
     <button onclick="window.location.href='https://example.com/detalhes3'">SAIBA MAIS!</button>
   </div>
+
   <div class="card">
     <img src="https://via.placeholder.com/300x200" alt="Imagem" />
     <div class="card-content">
@@ -71,6 +81,7 @@
     </div>
     <button onclick="window.location.href='https://example.com/detalhes4'">SAIBA MAIS!</button>
   </div>
+
   <div class="card">
     <img src="https://via.placeholder.com/300x200" alt="Imagem" />
     <div class="card-content">
@@ -79,6 +90,7 @@
     </div>
     <button onclick="window.location.href='https://example.com/detalhes5'">SAIBA MAIS!</button>
   </div>
+
   <div class="card">
     <img src="https://via.placeholder.com/300x200" alt="Imagem" />
     <div class="card-content">
@@ -88,6 +100,14 @@
     <button onclick="window.location.href='https://example.com/detalhes6'">SAIBA MAIS!</button>
   </div>
 </section>
+
+<script>
+  function scrollCategories(direction) {
+    const container = document.getElementById("categoryContainer");
+    const scrollAmount = 200;
+    container.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
+  }
+</script>
+
 </body>
 </html>
-
