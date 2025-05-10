@@ -1,4 +1,4 @@
-export const perfil = [
+export const Perfil = [
     {
         name: 'Hysia Milena',
         email: 'hysia.milena@academico.ifpb.edu.br',
@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
             institution: document.getElementById('institution').value,
         };
         
-        perfil.push(dadosPerfil);
+        Perfil.push(dadosPerfil); 
         
         alert('Perfil salvo com sucesso!');
-        console.log('Dados salvos:', perfil);
+        console.log('Dados salvos:', Perfil); // Corrigido aqui
     });
 });
