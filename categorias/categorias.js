@@ -3,4 +3,3 @@ function scrollCategories(direction) {
     const scrollAmount = 300;
     container.scrollLeft += direction * scrollAmount;
   }
-  
