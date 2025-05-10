@@ -12,7 +12,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: rgb(173, 216, 230);
+  background-color: #81d9ff;
 }
 
 .logo {
@@ -199,3 +199,31 @@ header {
     color: #000;
 }
 
+.category-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.category-container {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.scroll-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  color: #333;
+  z-index: 1;
+}
+
+.scroll-btn:hover {
+  color: #007bff;
+}

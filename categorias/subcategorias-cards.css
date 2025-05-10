@@ -3,10 +3,14 @@ body {
     font-optical-sizing: auto;
     font-weight: 2rem;
     font-style:normal;
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(to right, #06ccc2, #c273fd);  
+    background-color:rgb(101, 209, 245);
     margin: 0px
+  }
+  
+  .lobster-regular {
+    text-decoration: none;
+    color: inherit; 
+    cursor: pointer;
   }
   
   header {
@@ -14,7 +18,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: rgb(173, 216, 230);
+    background-color: #81d9ff;
   }
   
   .logo {
@@ -59,6 +63,7 @@ body {
   
   .categories {
     display: flex;
+    flex-wrap: nowrap; 
     overflow-x: auto;
     gap: 10px;
     margin: 20px 0;
@@ -92,6 +97,70 @@ body {
     font-size: 16px;
   }
   
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+    padding: 20px;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+    height: 100%;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    flex-grow: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-description {
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    flex-grow: 1;
+  }
+  
+  .card button {
+    width: 100%;
+    padding: 15px;
+    background-color: #4e27dbe0;
+    color: white;
+    border: none;
+    border-radius: 0 0 20px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .card button:hover {
+    background-color: #e438e4;
+  }
   .voluntariado--icon {
     display: inline-block;
     width: 60px;
@@ -200,5 +269,31 @@ body {
   .Academy{
       color: #000;
   }
-  
-  
+  .category-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.category-container {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+
+.scroll-btn {
+  background: none;
+  border: none;
+  font-size: 5rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  color: #333;
+  z-index: 1;
+}
+
+.scroll-btn:hover {
+  color: #007bff;
+}
