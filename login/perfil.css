@@ -3,7 +3,7 @@
     font-optical-sizing: auto;
     font-weight: 2rem;
     font-style: normal;
-    background-color: rgb(101, 209, 245);
+    background: linear-gradient(to right, #d3b0dd, #5ce1e6);  
     margin: 0px
   }
 
