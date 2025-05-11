@@ -205,8 +205,8 @@ body {
   }
 
   .quadrado-com-botao {
-    width: 570px;
-    height: 550px;
+    width: 550px;
+    height: 500px;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
