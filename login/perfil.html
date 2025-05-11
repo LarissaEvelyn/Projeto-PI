@@ -1,191 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Academy - Perfil</title>
+    <link rel="stylesheet" href="perfil.css" />
     <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #06CCCE, #C273FD);
-            min-height: 100vh;
-        }
-
-        .header {
-            background-color: #aee0fa;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .header h1 {
-            margin: 0;
-            color: #00008B;
-            font-size: 24px;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-        }
-
-        .search-bar input {
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-left: 5px;
-        }
-
-        .search-bar button {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .search-bar button:hover {
-            background-color: #0056b3;
-        }
-
-        .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 40px;
-        }
-
-        .profile-card {
-            background-color: #fff;
-            width: 600px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 10px 5px rgba(0, 0, 0, 0.2);
-            display: flex;
-            gap: 20px;
-        }
-
-        .profile-pic {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Foto pequena na barra de pesquisa */
-        .search-bar .profile-pic img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            object-fit: cover;
-        }
-
-        /* Foto grande no perfil */
-        .profile-card .profile-pic img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            object-fit: cover;
-        }
-
-        .profile-info {
-            flex-grow: 1;
-        }
-
-        .profile-info h2 {
-            margin-top: 0;
-            font-size: 20px;
-        }
-
-        .profile-info label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .profile-info input[type="text"],
-        .profile-info input[type="email"],
-        .profile-info input[type="password"],
-        .profile-info select,
-        .profile-info textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        .profile-info button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .profile-info button:hover {
-            background-color: #0056b3;
-        }
-
-        #photoInput {
-            display: none;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-   <div class="header">
-        <h1>Search Academy</h1>
-        <div class="search-bar">
-            <button>🔍</button>
-            <input type="text" placeholder="Qual atividade você procura?">
-            <div class="profile-pic">
-                <img id="smallProfilePic" src="placeholder-profile.png" alt="">
+    <header>
+        <a href="../tela inicial/tela_inical.html" class="lobster-regular">
+            <div class="lobster-regular">
+                <span class="Search">Search</span> <span class="Academy">Academy</span>
             </div>
-        </div>
-    </div>
+        </a>
+            <div class="search-bar">
+                <span class="stash--search-solid"></span>
+                <input type="text" placeholder="Qual atividade você procura?">
+            </div>
+            <div class="header-right">
+                <div class="icons">
+                    <a href="../notificações/notificacoes.html">
+                        <button class="icon-button" onclick="alert('Notificações')">
+                            <span class="mingcute--notification-line"></span>
+                        </button>
+                    </a>
+        
+                <div class="profile-pic small"">
+                    <img id="smallProfilePic" src="placeholder-profile.png" alt="Foto de perfil">
+                </div>
+            </div>
+
+    </header>
 
     <div class="content">
         <div class="profile-card">
             <div class="profile-pic">
-                <img id="largeProfilePic" src="placeholder-profile.png" alt="Foto de perfil">
+                <img id="largeProfilePic" src="placeholder-profile.png" alt="Foto de perfil grande">
                 <span>Foto de perfil</span>
                 <input type="file" id="photoInput" accept="image/*">
             </div>
 
             <div class="profile-info">
                 <h2>Perfil</h2>
-
                 <form>
                     <label for="username">Nome de usuário</label>
                     <input type="text" id="username" value="maria_123">
-    
+
                     <label for="email">E-mail</label>
                     <input type="email" id="email" value="maria@gmail.com">
-    
+
                     <label for="password">Senha</label>
                     <input type="password" id="password" value="********">
-    
+
                     <label for="institution">Instituição</label>
                     <input type="text" id="institution" value="Digite sua instituição de ensino">
-    
+
                     <label for="resume">Anexe seu currículo</label>
                     <input type="file" name="resume"><br><br>
+
                     <button type="submit">Salvar</button>
                 </form>
             </div>
@@ -194,16 +73,13 @@
 
     <!-- Script inline para manipulação básica das fotos -->
     <script>
-        //  Elementos das fotos de perfil
         const largeProfilePic = document.getElementById('largeProfilePic');
         const smallProfilePic = document.getElementById('smallProfilePic');
         const photoInput = document.getElementById('photoInput');
 
-        // Event listeners para fotos --  Para clicar na foto
         largeProfilePic.addEventListener('click', () => photoInput.click());
-        
-        // Manipulação da nova foto
-        photoInput.addEventListener('change', function(e) {
+
+        photoInput.addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
@@ -216,8 +92,7 @@
         });
     </script>
 
-    <!-- Referência ao seu módulo JavaScript externo -->
     <script src="perfil.js" type="module"></script>
 </body>
-</html>
 
+</html>
