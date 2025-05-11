@@ -23,20 +23,20 @@ body {
   }
   
   .search-bar {
-    display: flex;
-    align-items: center;
-    background: white;
-    border-radius: 8px;
-    padding: 15px 10px;
-    width: 300px;
-  }
-  
-  .search-bar input {
-    border: none;
-    outline: none;
-    width: 100%;
-    margin-left: 5px;
-  }
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  padding: 15px 10px;
+  width: 300px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  width: 100%;
+  margin-left: 5px;
+}
   
   .icons {
     display: flex;
@@ -205,8 +205,8 @@ body {
   }
 
   .quadrado-com-botao {
-    width: 570px;
-    height: 550px;
+    width: 550px;
+    height: 500px;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
