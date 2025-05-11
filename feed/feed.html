@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feed / Search Academy</title>
-    <link rel="shortcut icon" href="logo-icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="feed.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header da Página Inicial -->
@@ -40,72 +42,27 @@
                 <button onclick="adicionarPostagem()">Publicar</button>
             </div>
 
-            <!-- Post 1 -->
-            <div class="post">
-                <div>
-                    <span class="username">
-                        <i class="bi bi-person-circle"></i>
-                        @rosamar1a
-                    </span>
-                    <span class="timestamp">1h atrás</span>
-                </div>
-                <div class="post-content">
-                    A ONHB foi a melhor olimpíada que participei!! 🌟
-                </div>
-                <div class="actions">
-                    <button class="curtir">
-                        <i class="bi bi-heart"></i>
-                    </button>
-                    <button class="commentar">
-                        <i class="bi bi-chat-square-text"></i>
-                    </button>
+    <div class="post-container">
+        <div class="post">
+            <div>
+                <span class="username">
+                    <i class="bi bi-person-circle"></i>
+                    @SearchAcademy
+                </span>
+                <span class="timestamp">1h atrás</span>
+            </div>
+            <div class="post-content">
+                Seja Bem-Vindo(a) ao Feed!! 😁
+            </div>
+            <div class="actions">
+                <button class="curtir" onclick="toggleCurtir(this)">
+                    <i class="bi bi-heart"></i>
+                </button>
+                <button class="commentar">
+                    <i class="bi bi-chat-square-text"></i>
+                </button>
                 </div>
             </div>
-
-            <!-- Post 2 -->
-           <!-- <div class="post">
-                <div>
-                    <span class="username">
-                        <i class="bi bi-person-circle"></i>
-                        @larabaralho
-                    </span>
-                    <span class="timestamp">30min atrás</span>
-                </div>
-                <div class="post-content">
-                    Esse site é incrível, já me inscrevi em várias atividades.
-                </div>
-                <div class="actions">
-                    <button class="curtir">
-                        <i class="bi bi-heart"></i>
-                    </button>
-                    <button class="commentar">
-                        <i class="bi bi-chat-square-text"></i>
-                    </button>
-                </div>
-            </div> -->
-
-            <!-- Post 3 -->
-            <!-- <div class="post">
-                <div>
-                    <span class="username">
-                        <i class="bi bi-person-circle"></i>
-                        @noahschwap
-                    </span>
-                    <span class="timestamp">10min atrás</span>
-                </div>
-                <div class="post-content">
-                    Definitivamente programação não é pra mim 😵‍💫😅
-                </div>
-                <div class="actions">
-                    <button class="curtir">
-                        <i class="bi bi-heart"></i>
-                    </button>
-                    <button class="commentar">
-                        <i class="bi bi-chat-square-text"></i>
-                    </button>
-                </div>
-            </div> -->
-
         </div>
     </div>
     <script src="feed.js"></script>

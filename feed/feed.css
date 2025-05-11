@@ -1,19 +1,23 @@
 body {
+    font-family: "Raleway", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 2rem;
+    font-style:normal;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #b838def1, #9b31e7);
-    color: white;
+    height: 100vh;
+    background: linear-gradient(to top, #ddc1b0, #5ce1e6);
+    background-attachment: fixed;  
+    margin: 0px
 }
 
 header {
-    background-color: #aee0fa;
-    padding: 15px 30px;
+   background-color: #aee0fa;
+    padding: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between; 
-    font-size: 1.5rem;
-    font-weight: bold;
+    justify-content: space-between;
 }
+
 
 header h1 {
     margin: 0;
@@ -54,11 +58,16 @@ header h1 {
 }
 
 .feed {
-    background: linear-gradient(to bottom, #2b0b3d, #4b0082);
+ background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(10px); 
     border-radius: 20px;
     padding: 30px 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.1), 
+        inset 0 1px 1px rgba(255, 255, 255, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 
 .header h2 {
     font-size: 2.2rem;
@@ -68,40 +77,57 @@ header h1 {
 }
 
 .post {
-    background-color: rgba(30, 30, 30, 0.95);
+    background-color: #e6e6e6; /* Cinza claro sólido */
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    color: #333; /* Texto escuro para contraste */
 }
 
 .post:hover {
-    background-color: rgba(50, 40, 40, 1);
-    transform: scale(1.015);
+    background-color: #d8d8d8; /* Cinza médio no hover */
+    transform: scale(1.01);
 }
 
 .username {
     font-weight: bold;
-    color: #00bfff;
+    color: #0066cc; /* Azul para nomes de usuário */
     font-size: 1.1rem;
 }
 
 .timestamp {
     float: right;
     font-size: 0.9rem;
-    color: #cccccc;
+    color: #666; /* Cinza para o timestamp */
 }
 
 .post-content {
     margin: 12px 0;
-    color: white;
+    color: #222; /* Texto quase preto */
     font-size: 1rem;
+    line-height: 1.4;
 }
 
 .actions {
     display: flex;
     gap: 12px;
+    margin-top: 15px;
+}
+
+.actions button {
+    padding: 8px 16px;
+    background-color: #81d9ff; /* Azul claro (combina com o header) */
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.actions button:hover {
+    background-color: #5cb3e6; /* Azul mais escuro no hover */
 }
 
 button {
