@@ -205,8 +205,8 @@
   }
 
   .quadrado-com-botao {
-  width: 550px;
-  height: 500px;
+  width: 700px;
+  height: 850px;
   background-color: white;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -225,7 +225,7 @@
 }
 
 .center-image {
-  width: 200px;
+  width: 350px;
   height: auto;
   border-radius: 12px;
   margin-bottom: 20px;
