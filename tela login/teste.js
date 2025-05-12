@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (usuarioValido) {
       // Redireciona para outra página
-      window.location.href = "pagina2.html";
+      window.location.href = "tela_inicial.html";
     } else {
       alert('E-mail ou senha incorretos.');
     }
