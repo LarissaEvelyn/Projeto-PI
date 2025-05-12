@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Academy - Login</title>
+    <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon">
+    
+    <style>
+        /* Reset e configurações globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Fundo com degradê de azul para rosa */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #06ccc2, #c273fd);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Container principal */
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Card de login */
+        .login-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            color: #333;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Título */
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 24px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        /* Formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Campos de input */
+        input {
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            outline: none;
+            font-size: 16px;
+            border-radius: 8px;
+            color: #333;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: dodgerblue;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        /* Botão */
+        button {
+            background-color: #1e90ff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0077ff;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Ícone de login */
+        .login-icon {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .login-icon img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+        }
+
+        /* Responsividade */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+            
+            h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+            
+            input, button {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-icon">
+                <!-- Adicione um ícone aqui -->
+                <img src="login-icon.png" alt="Ícone de login">
+            </div>
+            <h2>Search Academy</h2>
+            <form id="loginForm">
+                <input id="email" type="email" name="email" placeholder="E-mail" required autocomplete="username">
+                <input id="senha" type="password" name="senha" placeholder="Senha" required autocomplete="current-password">
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="main.js" type="module"></script>
+</body>
+</html>
