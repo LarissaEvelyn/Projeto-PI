@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feed / Search Academy</title>
     <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="feed.css">
+    <link rel="stylesheet" href="perfil.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <!-- Header da Página Inicial -->
     <header>
-        <h1>Search Academy</h1>
+        <a href="../tela inicial/tela_inical.html" class="lobster-regular">
+            <span class="Search">Search</span> <span class="Academy">Academy</span>          
+        </a>
         <div class="search-bar">
-           <button>
-                <i class="bi bi-search"></i>
-            </button>
+            <span class="stash--search-solid"></span>
             <input type="text" placeholder="Qual atividade você procura?">
-            <div class="profile-pic">
-                <img class="userpic" src="person-circle.svg" alt="Foto Usuário">
-            </div>
         </div>
+        <div class="header-right">
+            <div class="icons">
+                <a href="../notificações/notificacoes.html">
+                    <button class="icon-button" onclick="alert('Notificações')">
+                        <span class="mingcute--notification-line"></span>
+                    </button>
+                </a>
+                <div class="profile-pic small"">
+        <img id=" smallProfilePic" src="placeholder-profile.png" alt="Foto de perfil">
+                </div>
     </header>
-
     <div class="container">
-       
         <div class="feed">
             <div class="header">
                 <h2>Feed</h2>
@@ -37,34 +46,36 @@
             </div>
             <!-- Publicar Postagem -->
             <div id="formularioPostagem" style="display: none; margin-bottom: 20px;">
-                <textarea id="novaPostagemTexto" rows="4" placeholder="Escreva sua postagem..." style="width: 100%; border-radius: 10px; padding: 10px;"></textarea>
+                <textarea id="novaPostagemTexto" rows="4" placeholder="Escreva sua postagem..."
+                    style="width: 100%; border-radius: 10px; padding: 10px;"></textarea>
                 <br>
                 <button onclick="adicionarPostagem()">Publicar</button>
             </div>
 
-    <div class="post-container">
-        <div class="post">
-            <div>
-                <span class="username">
-                    <i class="bi bi-person-circle"></i>
-                    @SearchAcademy
-                </span>
-                <span class="timestamp">1h atrás</span>
-            </div>
-            <div class="post-content">
-                Seja Bem-Vindo(a) ao Feed!! 😁
-            </div>
-            <div class="actions">
-                <button class="curtir" onclick="toggleCurtir(this)">
-                    <i class="bi bi-heart"></i>
-                </button>
-                <button class="commentar">
-                    <i class="bi bi-chat-square-text"></i>
-                </button>
+            <div class="post-container">
+                <div class="post">
+                    <div>
+                        <span class="username">
+                            <i class="bi bi-person-circle"></i>
+                            @SearchAcademy
+                        </span>
+                        <span class="timestamp">1h atrás</span>
+                    </div>
+                    <div class="post-content">
+                        Seja Bem-Vindo(a) ao Feed!! 😁
+                    </div>
+                    <div class="actions">
+                        <button class="curtir" onclick="toggleCurtir(this)">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <button class="commentar">
+                            <i class="bi bi-chat-square-text"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="feed.js"></script>
+        <script src="feed.js"></script>
 </body>
+
 </html>

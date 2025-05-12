@@ -1,81 +1,175 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
- }
- .container{
-    display:flex;
-    justify-content: center;
-    background: linear-gradient(#c273fd,#06ccce);
-    width: 100%;
-    height: 100vh;
- }
- .notificationContainer{
-    background-color: antiquewhite;
-    width: 700px;
-    margin: 2rem;
-    padding: 1rem 1rem;
-    border-radius: 1rem;
- }
- header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
- }
- .notificationHeader{
-    display: flex;
-    align-items: center;
- }
- #num-of-notif{
-    background-color: blue;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    width: 30px;
-    height: 30px;
-    border-radius: 0.5rem;
-    margin-left: 100px;
- }
- #mark-as-read{
-    color: gray;
-    cursor: pointer;
-    transition: 0.6s ease;
- }
- #mark-as-read:hover{
-    color: black
- }
- main{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
- }
- .notificationCard{
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    border-radius: 1rem;
- }
- .notificationCard img{
-    width: 50px;
- }
- .notificationCard .description{
-    margin-left: 10px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column
- }
- .unread{
-    background-color: pink;
- }
- @font-face {
-    font-family: 'MinhaFonte';
-    src: url('more_sugar/MoreSugar-Thin.otf');
- }
- h1 {
-    font-family: 'MinhaFonte';
- 
- 
- } 
+body {
+   font-family: "Raleway", sans-serif;
+   font-optical-sizing: auto;
+   font-weight: 2rem;
+   font-style: normal;
+   margin: 0;
+   height: 100vh;
+   background: linear-gradient(to right, #d3b0dd, #5ce1e6);
+   margin: 0px
+}
+
+.container {
+   display: flex;
+   justify-content: center;
+   background: linear-gradient(#c273fd, #06ccce);
+   width: 100%;
+   height: 100vh;
+}
+
+header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px 20px;
+   background-color: #81d9ff;
+}
+
+.logo {
+   font-size: 24px;
+   font-weight: bold;
+}
+
+.search-bar {
+   display: flex;
+   align-items: center;
+   background: white;
+   border-radius: 8px;
+   padding: 15px 10px;
+   width: 300px;
+}
+
+.search-bar input {
+   border: none;
+   outline: none;
+   width: 100%;
+   margin-left: 5px;
+}
+
+.icons {
+   display: flex;
+   gap: 15px;
+   justify-content: center;
+}
+
+.icon-button {
+   background: none;
+   border: none;
+   font-size: 24px;
+   cursor: pointer;
+   padding: 5px;
+   transition: transform 0.2s;
+}
+
+.icon-button:hover {
+   transform: scale(1.2);
+}
+
+.mingcute--user-4-fill {
+   display: inline-block;
+   width: 40px;
+   height: 40px;
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z'/%3E%3Cpath fill='%23fafafa' d='M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2M8.5 9.5a3.5 3.5 0 1 1 7 0a3.5 3.5 0 0 1-7 0m9.758 7.484A7.99 7.99 0 0 1 12 20a7.99 7.99 0 0 1-6.258-3.016C7.363 15.821 9.575 15 12 15s4.637.821 6.258 1.984'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.mingcute--notification-line {
+   display: inline-block;
+   width: 40px;
+   height: 40px;
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z'/%3E%3Cpath fill='%23fedd1b' d='M5 9a7 7 0 0 1 14 0v3.764l1.822 3.644A1.1 1.1 0 0 1 19.838 18h-3.964a4.002 4.002 0 0 1-7.748 0H4.162a1.1 1.1 0 0 1-.984-1.592L5 12.764zm5.268 9a2 2 0 0 0 3.464 0zM12 4a5 5 0 0 0-5 5v3.764a2 2 0 0 1-.211.894L5.619 16h12.763l-1.17-2.342a2 2 0 0 1-.212-.894V9a5 5 0 0 0-5-5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.stash--search-solid {
+   display: inline-block;
+   width: 20px;
+   height: 20px;
+   background-repeat: no-repeat;
+   background-size: 100% 100%;
+   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23817c7c' fill-rule='evenodd' d='M10.44 2.75a7.69 7.69 0 1 0 4.615 13.842c.058.17.154.329.29.464l3.84 3.84a1.21 1.21 0 0 0 1.71-1.712l-3.84-3.84a1.2 1.2 0 0 0-.463-.289A7.69 7.69 0 0 0 10.44 2.75m-5.75 7.69a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0' clip-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.lobster-regular {
+   font-family: "Lobster", sans-serif;
+   font-weight: 400;
+   font-style: normal;
+   font-size: 24px;
+   text-decoration: none;
+   color: inherit; 
+   cursor: pointer;
+}
+
+.Search {
+   color: #0097b2;
+}
+
+.Academy {
+   color: #000;
+
+}
+
+.notificationContainer {
+   background-color: antiquewhite;
+   width: 700px;
+   margin: 2rem;
+   padding: 1rem 1rem;
+   border-radius: 1rem;
+}
+
+.notificationHeader {
+   display: flex;
+   align-items: center;
+}
+
+#num-of-notif {
+   background-color: blue;
+   color: #fff;
+   display: flex;
+   align-items: center;
+   font-weight: 700;
+   width: 30px;
+   height: 30px;
+   border-radius: 0.5rem;
+   margin-left: 100px;
+}
+
+#mark-as-read {
+   color: gray;
+   cursor: pointer;
+   transition: 0.6s ease;
+}
+
+#mark-as-read:hover {
+   color: black
+}
+
+main {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.notificationCard {
+   display: flex;
+   align-items: center;
+   padding: 1rem;
+   border-radius: 1rem;
+}
+
+.notificationCard img {
+   width: 50px;
+}
+
+.notificationCard .description {
+   margin-left: 10px;
+   display: flex;
+   justify-content: space-between;
+   flex-direction: column
+}
+
+.unread {
+   background-color: pink;
+}
