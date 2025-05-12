@@ -22,7 +22,7 @@
     font-weight: bold;
   }
   
-  .search-bar {
+.search-bar {
   display: flex;
   align-items: center;
   background: white;
