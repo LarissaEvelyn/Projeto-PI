@@ -1,8 +1,11 @@
-// Função para rolagem das categorias
 function scrollCategories(direction) {
-  const container = document.getElementById('categoryContainer');
-  const scrollAmount = 300;
-  container.scrollLeft += direction * scrollAmount;
+  const container = document.getElementById("categoriesContainer");
+  const scrollAmount = 300; // Ajuste este valor conforme necessário
+  
+  container.scrollBy({
+    left: scrollAmount * direction,
+    behavior: 'smooth'
+  });
 }
 
 // Gerenciador de Posts

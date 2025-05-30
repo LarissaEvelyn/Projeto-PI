@@ -12,12 +12,6 @@ server.use(cors());
 server.use(express.json());
 app.use(express.static('public'));
 
-//tel inicial
-const path = require('path');
-app.get('/tela-inicial', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'tela inicial', 'tela_inical.html'));
-});
-
 // Dados em memória
 const posts = [
   {
@@ -30,11 +24,6 @@ const posts = [
   }
 ];
 
-const categories = [
-  { id: uuidv4(), name: 'Voluntariado' },
-  { id: uuidv4(), name: 'Olimpíadas' },
-  { id: uuidv4(), name: 'Projetos de Extensão' }
-];
 
 // Classe de erro personalizado
 class AppError extends Error {
