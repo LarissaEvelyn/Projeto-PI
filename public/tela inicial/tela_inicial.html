@@ -71,21 +71,21 @@
       <button class="scroll-btn right" onclick="scrollCategories(1)">&#8250;</button>
     </div>
 
-    <div class="quadrado-com-botao">
+    <div class="feed-preview">
       <h2 class="card-title">Feed</h2>
-      <img src="https://i.pinimg.com/736x/bd/9e/7a/bd9e7ae9c15b3b54a0e47bba79d0363d.jpg" alt="Imagem" class="center-image">
-      <a href="../feed/feed.html">
-        <button class="botao">SAIBA MAIS</button>
-      </a>
+      <div class="recent-posts" id="recentPostsContainer">
+        <!-- Posts serão carregados dinamicamente aqui -->
+        <div class="post-preview empty-state">
+          <i class="bi bi-arrow-repeat"></i>
+          <p>Carregando postagens recentes...</p>
+        </div>
+      </div>
+      <a href="../feed/feed.html" class="see-more">Ver tudo no Feed →</a>
+    
     </div>
-  </main>
+  </main
 
-  <script>
-    function scrollCategories(direction) {
-    const container = document.getElementById("categoryContainer");
-    const scrollAmount = 200;
-    container.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
-  }
+  <script src="script.js"></script>
 
   </script>
 </body>

@@ -42,7 +42,7 @@ app.get('/notificacoes', (req, res) => {
 });
 
 // Tela Inicial
-app.get('/tela-inicial', (req, res) => {
+app.get('/tela inicial', (req, res) => {
   res.json({ message: 'Bem-vindo à tela inicial!' });
 });
 
