@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search Academy</title>
-  
+  <link rel="stylesheet" href="tela_inicial.css" />
   <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,12 +82,11 @@
 
   <script>
     function scrollCategories(direction) {
-      const container = document.getElementById('categoryContainer');
-      container.scrollBy({
-        left: direction * 200,
-        behavior: 'smooth'
-      });
-    }
+    const container = document.getElementById("categoryContainer");
+    const scrollAmount = 200;
+    container.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
+  }
+
   </script>
 </body>
 </html>
