@@ -10,7 +10,7 @@ server.use(morgan('dev'));
 server.use(express.static('public'));
 server.use(cors());
 server.use(express.json());
-app.use(express.static('public'));
+server.use(express.static('public'));
 
 // Dados em memória
 const posts = [
