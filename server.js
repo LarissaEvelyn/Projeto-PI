@@ -46,7 +46,7 @@ const notifications = [
   },
 ];
 
-// ✅ Rota da API para retornar notificações
+//  Rota da API para retornar notificações
 app.get('/api/notificacoes', (req, res) => {
   res.json(notifications);
 });
