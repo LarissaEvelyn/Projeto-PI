@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { v4 as uuidv4 } from 'uuid';
+import { Perfil } from 'data/perfil.js'
 
 // Configuração inicial
 const server = express();
@@ -114,3 +115,29 @@ server.listen(PORT, () => {
   console.log(`- GET    /api/categories`);
  
 });
+//rotasdecadastro 
+server.post ("/api/cadastro",(req, res) => {
+  let name = req.body.name;
+
+        name: 'Hysia Milena',
+        email: 'hysia.milena@academico.ifpb.edu.br',
+        passwd: 'escola',
+        institution: 'ifpb',
+        resume: './Hysia.pdf',
+    },
+    {
+        name: 'Larissa Evelyn',
+        email: 'larissa.evelyn@academico.ifpb.edu.br',
+        passwd: 'atividade',
+        institution: 'ifpb',
+        resume: './Larisa.pdf',
+    },
+    {
+        name: 'Lara Ramalho',
+        email: 'lara.ramalho@academico.ifpb.edu.br',
+        passwd: 'ifpb',
+        institution: 'ifpb',
+        resume: './Lara.pdf',
+    },
+];
+})
