@@ -1,4 +1,4 @@
-import { login as logins } from './pag1.js';
+import { login as logins } from './login.js';
 
 const form = document.querySelector('form');
 

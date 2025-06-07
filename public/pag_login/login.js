@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (usuarioEncontrado) {
       alert('Login bem-sucedido!');
       // Redireciona para tela_inicial.html
-      window.location.href = '../tela_inicial/tela_inicial.html';
+      window.location.href = '../pag_inicial/tela_inicial.html';
     } else {
       alert('E-mail ou senha incorretos!');
     }
