@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { Perfil } from 'data/perfil.js';
 
 // Configuração de diretório __dirname (ESM)
 const __filename = fileURLToPath(import.meta.url);
@@ -138,6 +139,69 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(publicPath, 'pag_login', 'login.html'));
 });
 
+//========================
+// PERFIL 
+//========================
+
+const perfis = [
+  {
+    id: uuidv4(),
+    name: 'Hysia Milena',
+    email: 'hysia.milena@academico.ifpb.edu.br',
+    passwd: 'escola',
+    institution: 'ifpb',
+    resume: './Hysia.pdf',
+  },
+  {
+    id: uuidv4(),
+    name: 'Larissa Evelyn',
+    email: 'larissa.evelyn@academico.ifpb.edu.br',
+    passwd: 'atividade',
+    institution: 'ifpb',
+    resume: './Larisa.pdf',
+  },
+  {
+    id: uuidv4(),
+    name: 'Lara Ramalho',
+    email: 'lara.ramalho@academico.ifpb.edu.br',
+    passwd: 'ifpb',
+    institution: 'ifpb',
+    resume: './Lara.pdf',
+  }
+];
+
+// Rotas de Perfil
+app.get('/api/perfis', (req, res) => {
+  res.json(perfis);
+});
+
+app.post('/api/cadastro', (req, res) => {
+  const { name, email, passwd, institution, resume } = req.body;
+
+  // Validação básica
+  if (!name || !email || !passwd || !institution) {
+    throw new AppError('Nome, email, senha e instituição são obrigatórios', 400);
+  }
+
+  // Verificar se o email já existe
+  if (perfis.some(perfil => perfil.email === email)) {
+    throw new AppError('Email já cadastrado', 400);
+  }
+
+  const novoPerfil = {
+    id: uuidv4(),
+    name,
+    email,
+    passwd, // Em produção, usar bcrypt para hashear a senha
+    institution,
+    resume: resume || ''
+  };
+
+  perfis.push(novoPerfil);
+  res.status(201).json(novoPerfil);
+});
+
+
 // =======================
 // TRATAMENTO DE ERROS
 // =======================
@@ -176,4 +240,6 @@ app.listen(PORT, () => {
   console.log('- GET    /notificacoes');
   console.log('- GET    /tela_inicial');
   console.log('- GET    /login');
+  console.log(`- GET    /api/perfis`);
+  console.log(`- POST   /api/cadastro`);
 });
