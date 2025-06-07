@@ -3,7 +3,6 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { v4 as uuidv4 } from 'uuid';
-import { Perfil } from 'data/perfil.js';
 
 // Configuração inicial
 const server = express();
@@ -22,34 +21,6 @@ const posts = [
     likes: 0,
     comments: [],
     createdAt: new Date().toISOString()
-  }
-];
-
-// Adicionando perfis (dados em memória)
-const perfis = [
-  {
-    id: uuidv4(),
-    name: 'Hysia Milena',
-    email: 'hysia.milena@academico.ifpb.edu.br',
-    passwd: 'escola',
-    institution: 'ifpb',
-    resume: './Hysia.pdf',
-  },
-  {
-    id: uuidv4(),
-    name: 'Larissa Evelyn',
-    email: 'larissa.evelyn@academico.ifpb.edu.br',
-    passwd: 'atividade',
-    institution: 'ifpb',
-    resume: './Larisa.pdf',
-  },
-  {
-    id: uuidv4(),
-    name: 'Lara Ramalho',
-    email: 'lara.ramalho@academico.ifpb.edu.br',
-    passwd: 'ifpb',
-    institution: 'ifpb',
-    resume: './Lara.pdf',
   }
 ];
 
@@ -105,37 +76,6 @@ server.get('/api/categories', (req, res) => {
   res.json(categories);
 });
 
-// Rotas de Perfil
-server.get('/api/perfis', (req, res) => {
-  res.json(perfis);
-});
-
-server.post('/api/cadastro', (req, res) => {
-  const {name, email, passwd, institution, resume} = req.body;
-
-// Validação básica
-  if (!name || !email || !passwd || !institution) {
-    throw new AppError ('Nome, email, senha e instituição são obrigatórios', 400);
-  }
-
-  //Verificar se o email já existe
-  if (perfis.some(perfil => perfil.email === email)) {
-    throw new AppError('Email já cadastrado',400);
-  }
-
-  const novoPerfil = {
-    id: uuidv4(),
-    name,
-    email,
-    passwd, // Na prática, você deve hash a senha antes de armazenar!
-    institution,
-    resume: resume || ''
-  };
-
-  perfis.push(novoPerfil);
-  res.status(201).json(novoPerfil);
-});
-
 // Tratamento de erros
 // ==================
 
@@ -170,7 +110,5 @@ server.listen(PORT, () => {
   console.log(`- POST   /api/posts`);
   console.log(`- POST   /api/posts/:id/like`);
   console.log(`- GET    /api/categories`);
-  console.log(`- GET    /api/perfis`);
-  console.log(`- POST   /api/cadastro`);
  
 });
