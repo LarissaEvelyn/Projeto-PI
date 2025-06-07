@@ -11,6 +11,9 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Caminho absoluto para a pasta public (assumindo que está em /Projeto-PI/public)
+const publicPath = path.join(__dirname, '..', '..', 'public');
+
 // Inicialização do app
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,7 +22,7 @@ const PORT = process.env.PORT || 3000;
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(publicPath));
 
 // =======================
 // POSTS (feed)
@@ -124,15 +127,15 @@ app.get('/api/notificacoes', (req, res) => {
 // =======================
 
 app.get('/notificacoes', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/pag_notificacoes/notif.html'));
+  res.sendFile(path.join(publicPath, 'pag_notificacoes', 'notif.html'));
 });
 
 app.get('/tela_inicial', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/pag_inicial/tela_inicial.html'));
+  res.sendFile(path.join(publicPath, 'pag_inicial', 'tela_inicial.html'));
 });
 
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/pag_login/perfil.html'));
+  res.sendFile(path.join(publicPath, 'pag_login', 'login.html'));
 });
 
 // =======================
