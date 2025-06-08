@@ -226,6 +226,92 @@ app.use((err, req, res, next) => {
   });
 });
 
+// ROTAS LOGIN 
+
+const login = [
+  {
+    email: 'hysia.milena@academico.ifpb.edu.br',
+    senha: 'escola',
+  },
+  {
+    email: 'larissa.evelyn@academico.ifpb.edu.br',
+    senha: 'atividade',
+  },
+  {
+    
+    email: 'lara.ramalho@academico.ifpb.edu.br',
+    senha: 'ifpb',
+   
+  }
+];
+let sessaoAtiva = null;
+
+// 5. Rotas da API
+
+// Rota de login (POST)
+app.post('/api/login', (req, res) => {
+  try {
+    // Validação dos dados
+    if (!req.body.email || !req.body.senha) {
+      throw new Error('Email e senha são obrigatórios');
+    }
+
+    // Busca o usuário
+    const usuario = usuarios.find(u => 
+      u.email === req.body.email && 
+      u.senha === req.body.senha
+    );
+
+    if (!usuario) {
+      throw new Error('Credenciais inválidas');
+    }
+
+    // Cria a sessão (sem a senha)
+    const { senha: _, ...usuarioSemSenha } = usuario;
+    sessaoAtiva = usuarioSemSenha;
+
+    // Resposta de sucesso
+    res.json({
+      status: 'sucesso',
+      mensagem: 'Login realizado!',
+      usuario: usuarioSemSenha,
+      token: 'simulado-123-abc' // Em projetos reais, usar JWT
+    });
+
+  } catch (erro) {
+    // Resposta de erro
+    res.status(401).json({
+      status: 'erro',
+      mensagem: erro.message
+    });
+  }
+});
+
+// Rota de logout (GET)
+app.get('/api/logout', (req, res) => {
+  sessaoAtiva = null;
+  res.json({ 
+    status: 'sucesso',
+    mensagem: 'Logout realizado com sucesso!' 
+  });
+});
+
+// Rota de perfil (GET) - Requer login
+app.get('/api/perfil', (req, res) => {
+  if (!sessaoAtiva) {
+    return res.status(403).json({
+      status: 'erro',
+      mensagem: 'Acesso não autorizado'
+    });
+  }
+
+  res.json({
+    status: 'sucesso',
+    usuario: sessaoAtiva
+  });
+});
+
+
 // =======================
 // INICIAR SERVIDOR
 // =======================
@@ -242,4 +328,4 @@ app.listen(PORT, () => {
   console.log('- GET    /login');
   console.log(`- GET    /api/perfis`);
   console.log(`- POST   /api/cadastro`);
-});
+}); 
