@@ -249,41 +249,39 @@ let sessaoAtiva = null;
 // 5. Rotas da API
 
 // Rota de login (POST)
+// Substitua a rota /api/login por esta versão corrigida:
 app.post('/api/login', (req, res) => {
   try {
-    // Validação dos dados
-    if (!req.body.email || !req.body.senha) {
-      throw new Error('Email e senha são obrigatórios');
+    const { email, senha } = req.body;
+
+    // Validação
+    if (!email || !senha) {
+      throw new AppError('Email e senha são obrigatórios', 400);
     }
 
-    // Busca o usuário
-    const usuario = usuarios.find(u => 
-      u.email === req.body.email && 
-      u.senha === req.body.senha
-    );
+    // Busca o perfil (usando o array 'perfis')
+    const usuario = perfis.find(p => p.email === email);
 
-    if (!usuario) {
-      throw new Error('Credenciais inválidas');
+    if (!usuario || usuario.passwd !== senha) { // Em produção, use bcrypt.compare()
+      throw new AppError('Credenciais inválidas', 401);
     }
 
-    // Cria a sessão (sem a senha)
-    const { senha: _, ...usuarioSemSenha } = usuario;
+    // Remove a senha da resposta
+    const { passwd: _, ...usuarioSemSenha } = usuario;
     sessaoAtiva = usuarioSemSenha;
 
-    // Resposta de sucesso
     res.json({
       status: 'sucesso',
-      mensagem: 'Login realizado!',
       usuario: usuarioSemSenha,
-      token: 'simulado-123-abc' // Em projetos reais, usar JWT
+      token: 'simulado-123-abc' // Em produção, use JWT
     });
 
   } catch (erro) {
-    // Resposta de erro
-    res.status(401).json({
-      status: 'erro',
-      mensagem: erro.message
-    });
+    if (erro instanceof AppError) {
+      res.status(erro.statusCode).json({ erro: erro.message });
+    } else {
+      res.status(500).json({ erro: 'Erro interno no servidor' });
+    }
   }
 });
 
