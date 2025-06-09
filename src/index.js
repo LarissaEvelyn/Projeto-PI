@@ -9,12 +9,6 @@ import { dirname } from 'path';
 import { Perfil } from './data/perfil.js';
 import { login } from './data/login.js';
 
-// Configuração de diretório __dirname (ESM)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Caminho absoluto para a pasta public (assumindo que está em /Projeto-PI/public)
-const publicPath = path.join(__dirname, '..', '..', 'public');
 
 // Inicialização do app
 const app = express();
@@ -24,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-app.use(express.static(publicPath));
+app.use(express.static('public'));
 
 // =======================
 // POSTS (feed)
@@ -124,21 +118,6 @@ app.get('/api/notificacoes', (req, res) => {
   res.json(notifications);
 });
 
-// =======================
-// ROTAS DE PÁGINAS
-// =======================
-
-app.get('/notificacoes', (req, res) => {
-  res.sendFile(path.join(publicPath, 'pag_notificacoes', 'notif.html'));
-});
-
-app.get('/tela_inicial', (req, res) => {
-  res.sendFile(path.join(publicPath, 'pag_inicial', 'tela_inicial.html'));
-});
-
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(publicPath, 'pag_login', 'login.html'));
-});
 
 //========================
 // PERFIL 
@@ -203,29 +182,7 @@ app.post('/api/cadastro', (req, res) => {
 });
 
 
-// =======================
-// TRATAMENTO DE ERROS
-// =======================
 
-app.use((req, res, next) => {
-  throw new AppError('Endpoint não encontrado', 404);
-});
-
-app.use((err, req, res, next) => {
-  console.error(err);
-
-  if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
-      error: err.message,
-      status: err.statusCode
-    });
-  }
-
-  res.status(500).json({
-    error: 'Erro interno no servidor',
-    status: 500
-  });
-});
 
 // ROTAS LOGIN 
 
@@ -317,6 +274,29 @@ app.get('/api/perfil', verificarSessao, (req, res) => {
   });
 });
 
+// =======================
+// TRATAMENTO DE ERROS
+// =======================
+
+app.use((req, res, next) => {
+  res.status(404).json({ message: 'Content not found!' });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err);
+
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      error: err.message,
+      status: err.statusCode
+    });
+  }
+
+  res.status(500).json({
+    error: 'Erro interno no servidor',
+    status: 500
+  });
+});
 
 
 // =======================
