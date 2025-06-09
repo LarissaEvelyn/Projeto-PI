@@ -6,8 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { Perfil } from 'data/perfil.js';
-import { login } from 'data/login.js';
+import { Perfil } from './data/perfil.js';
+import { login } from './data/login.js';
 
 // Configuração de diretório __dirname (ESM)
 const __filename = fileURLToPath(import.meta.url);
