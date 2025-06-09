@@ -4,7 +4,7 @@
     "scripts": {
         "start": "node src/index.js",
         "dev": "node --watch src/index.js",
-        "notif": "node server.js"
+        "notif": "node index.js"
     },
     "dependencies": {
         "cors": "^2.8.5",
