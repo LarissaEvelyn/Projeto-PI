@@ -7,6 +7,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { Perfil } from 'data/perfil.js';
+import { login } from 'data/login.js';
 
 // Configuração de diretório __dirname (ESM)
 const __filename = fileURLToPath(import.meta.url);
@@ -228,60 +229,74 @@ app.use((err, req, res, next) => {
 
 // ROTAS LOGIN 
 
-const login = [
+// Dados de usuários (substitui 'login' por 'usuarios' para consistência)
+const usuarios = [
   {
     email: 'hysia.milena@academico.ifpb.edu.br',
     senha: 'escola',
+    nome: 'Hysia Milena',
+    instituicao: 'IFPB'
   },
   {
     email: 'larissa.evelyn@academico.ifpb.edu.br',
     senha: 'atividade',
+    nome: 'Larissa Evelyn',
+    instituicao: 'IFPB'
   },
   {
-    
     email: 'lara.ramalho@academico.ifpb.edu.br',
     senha: 'ifpb',
-   
+    nome: 'Lara Ramalho',
+    instituicao: 'IFPB'
   }
 ];
+
 let sessaoAtiva = null;
 
-// 5. Rotas da API
+// Middleware para verificar sessão (reutilizável)
+const verificarSessao = (req, res, next) => {
+  if (!sessaoAtiva) {
+    return res.status(403).json({
+      status: 'erro',
+      mensagem: 'Acesso não autorizado. Faça login primeiro.'
+    });
+  }
+  next();
+};
 
 // Rota de login (POST)
-// Substitua a rota /api/login por esta versão corrigida:
 app.post('/api/login', (req, res) => {
   try {
+    // Validação dos dados
     const { email, senha } = req.body;
-
-    // Validação
     if (!email || !senha) {
       throw new AppError('Email e senha são obrigatórios', 400);
     }
 
-    // Busca o perfil (usando o array 'perfis')
-    const usuario = perfis.find(p => p.email === email);
-
-    if (!usuario || usuario.passwd !== senha) { // Em produção, use bcrypt.compare()
+    // Busca o usuário
+    const usuario = usuarios.find(u => u.email === email);
+    if (!usuario || usuario.senha !== senha) {
       throw new AppError('Credenciais inválidas', 401);
     }
 
-    // Remove a senha da resposta
-    const { passwd: _, ...usuarioSemSenha } = usuario;
+    // Cria a sessão (sem a senha)
+    const { senha: _, ...usuarioSemSenha } = usuario;
     sessaoAtiva = usuarioSemSenha;
 
+    // Resposta de sucesso
     res.json({
       status: 'sucesso',
+      mensagem: 'Login realizado!',
       usuario: usuarioSemSenha,
-      token: 'simulado-123-abc' // Em produção, use JWT
+      token: 'simulado-123-abc' // Em produção, usar JWT com expiração
     });
 
   } catch (erro) {
-    if (erro instanceof AppError) {
-      res.status(erro.statusCode).json({ erro: erro.message });
-    } else {
-      res.status(500).json({ erro: 'Erro interno no servidor' });
-    }
+    // Resposta de erro
+    res.status(erro.statusCode || 500).json({
+      status: 'erro',
+      mensagem: erro.message
+    });
   }
 });
 
@@ -294,20 +309,14 @@ app.get('/api/logout', (req, res) => {
   });
 });
 
-// Rota de perfil (GET) - Requer login
-app.get('/api/perfil', (req, res) => {
-  if (!sessaoAtiva) {
-    return res.status(403).json({
-      status: 'erro',
-      mensagem: 'Acesso não autorizado'
-    });
-  }
-
+// Rota de perfil (GET) - Protegida por sessão
+app.get('/api/perfil', verificarSessao, (req, res) => {
   res.json({
     status: 'sucesso',
     usuario: sessaoAtiva
   });
 });
+
 
 
 // =======================
