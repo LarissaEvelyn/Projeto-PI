@@ -2,97 +2,121 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Academy - Perfil</title>
-    <link rel="stylesheet" href="/pag_modif_perfil/perfil.css" />
-    <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Academy - Perfil</title>
+  <link rel="stylesheet" href="/pag_modif_perfil/perfil.css" />
+  <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <style>
+    .icon-button .iconify {
+      width: 40px;
+      height: 40px;
+    }
+
+    .icon-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .profile-pic img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .profile-pic.small img {
+      width: 40px;
+      height: 40px;
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <a href="../pag_inicial/tela_inicial.html" class="lobster-regular">
-            <div class="lobster-regular">
-                <span class="Search">Search</span> <span class="Academy">Academy</span>
-            </div>
-        </a>
-        <div class="search-bar">
-            <span class="stash--search-solid"></span>
-            <input type="text" placeholder="Qual atividade você procura?">
-        </div>
-        <div class="header-right">
-            <div class="icons">
-                <a href="../pag_notificacoes/notif.html">
-                    <button class="icon-button" onclick="alert('Notificações')">
-                        <span class="mingcute--notification-line"></span>
-                    </button>
-                </a>
-
-                <div class="profile-pic small"">
-                    <img id=" smallProfilePic" src="placeholder-profile.png" alt="Foto de perfil">
-                </div>
-            </div>
-
-    </header>
-
-    <div class="content">
-        <div class="profile-card">
-            <div class="profile-pic">
-                <img id="largeProfilePic" src="placeholder-profile.png" alt="Foto de perfil grande">
-                <span>Foto de perfil</span>
-                <input type="file" id="photoInput" accept="image/*">
-            </div>
-
-            <div class="profile-info">
-                <h2>Perfil</h2>
-                <form>
-                    <label for="username">Nome de usuário</label>
-                    <input type="text" id="username" placeholder="Username">
-
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="E-mail">
-
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" placeholder="Senha">
-
-                    <label for="institution">Instituição</label>
-                    <input type="text" id="institution" placeholder="Digite sua instituição de ensino">
-
-                    <label for="resume">Anexe seu currículo</label>
-                    <input type="file" name="resume"><br><br>
-
-                    <button type="submit">Salvar</button>
-                </form>
-            </div>
-        </div>
+  <header>
+    <a href="../pag_inicial/tela_inicial.html" class="lobster-regular">
+      <div class="lobster-regular">
+        <span class="Search">Search</span> <span class="Academy">Academy</span>
+      </div>
+    </a>
+    <div class="search-bar">
+      <span class="stash--search-solid"></span>
+      <input type="text" placeholder="Qual atividade você procura?" />
     </div>
+    <div class="header-right">
+      <div class="icons">
+        <!-- Ícone de perfil (branco) -->
+        <a href="../pag_modif_perfil/perfil.html">
+          <button class="icon-button">
+            <span class="iconify" data-icon="mingcute:user-4-fill" style="color: white;"></span>
+          </button>
+        </a>
+        <!-- Ícone de notificação (amarelo) -->
+        <a href="../pag_notificacoes/notif.html">
+          <button class="icon-button">
+            <span class="iconify" data-icon="mingcute:notification-line" style="color: #FFD700;"></span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Script inline para manipulação básica das fotos -->
-    <script>
-        const largeProfilePic = document.getElementById('largeProfilePic');
-        const smallProfilePic = document.getElementById('smallProfilePic');
-        const photoInput = document.getElementById('photoInput');
+  <div class="content">
+    <div class="profile-card">
+      <div class="profile-pic" style="text-align: center;">
+        <img id="largeProfilePic" src="https://via.placeholder.com/120" alt="Foto de perfil grande" title="Clique para trocar" onclick="document.getElementById('photoInput').click()" />
+        <span>Foto de perfil</span>
+        <input type="file" id="photoInput" accept="image/*" style="display: none;" />
+      </div>
 
-        largeProfilePic.addEventListener('click', () => photoInput.click());
+      <div class="profile-info">
+        <h2>Perfil</h2>
+        <form>
+          <label for="username">Nome de usuário</label>
+          <input type="text" id="username" placeholder="Username" value="lara.ramalho@academico.ifpb.edu.br" />
 
-        photoInput.addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    largeProfilePic.src = event.target.result;
-                    smallProfilePic.src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="E-mail" />
 
-    <script src="perfil.js" type="module"></script>
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="Senha" />
+
+          <label for="institution">Instituição</label>
+          <input type="text" id="institution" placeholder="Digite sua instituição de ensino" />
+
+          <label for="resume">Anexe seu currículo</label>
+          <input type="file" name="resume"><br><br>
+
+          <button type="submit">Salvar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const largeProfilePic = document.getElementById('largeProfilePic');
+    const photoInput = document.getElementById('photoInput');
+
+    photoInput.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          largeProfilePic.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+  <script src="perfil.js" type="module"></script>
 </body>
 
 </html>
