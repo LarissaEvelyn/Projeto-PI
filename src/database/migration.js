@@ -22,7 +22,7 @@ const extracurriculares = `
       Descricao VARCHAR(100)
       )`;;
  
-  await db.run(notificacoes);
+  await db.run(extracurriculares);
 
   const notificacoes = `
     CREATE TABLE Notificacao (
