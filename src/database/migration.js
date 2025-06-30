@@ -22,8 +22,27 @@ const extracurriculares = `
       Descricao VARCHAR(100)
       )`;;
  
-  await db.run(extracurriculares);
-      
+  await db.run(notificacoes);
+
+  const notificacoes = `
+    CREATE TABLE Notificacao (
+      Cod INTEGER PRIMARY KEY,
+      Descricao VARCHAR(100),
+      Data_emissao DATE
+      )`;
+ 
+  await db.run(notificacoes);
+   
+  const professor = `
+    CREATE TABLE Professor (
+      Cod_Professor INTEGER PRIMARY KEY,
+      Email VARCHAR(40),
+      Nome VARCHAR(40),
+      Senha VARCHAR(20)
+      )`;
+ 
+  await db.run(professor);
+  
   }
  
 export default { up };
