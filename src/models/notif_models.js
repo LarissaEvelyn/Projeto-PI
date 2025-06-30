@@ -1,6 +1,5 @@
 // ✅ notif_models.js
-import { v4 as uuidv4 } from 'uuid';
-import { notifications } from '../database/data.js';
+import { notifications } from '../database/database.js';
 
 function create({ text, photo = 'person.jpeg', unread = true }) {
   if (!text) throw new Error('Texto da notificação é obrigatório');

@@ -1,6 +1,5 @@
 // ✅ post_models.js
-import { v4 as uuidv4 } from 'uuid';
-import { posts } from '../database/data.js';
+import { posts } from '../database/database.js';
 
 function create({ author, content }) {
   if (!author || !content) {

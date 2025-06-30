@@ -1,5 +1,5 @@
 // ✅ usuarios_models.js
-import { usuarios, sessaoAtiva as state } from '../database/data.js';
+import { usuarios, sessaoAtiva as state } from '../database/database.js';
 
 function login(email, senha) {
   const usuario = usuarios.find(u => u.email === email);

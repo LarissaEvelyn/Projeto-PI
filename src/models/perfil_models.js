@@ -1,5 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
-import { perfis } from '../database/data.js';
+import { perfis } from '../database/database.js';
 
 function create({ name, email, passwd, institution, resume = '' }) {
   if (!name || !email || !passwd || !institution) {
