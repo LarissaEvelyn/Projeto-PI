@@ -122,17 +122,33 @@ function renderPost(post) {
 }
 
 function toggleCurtir(button, postId) {
-    const updatedPost = PostManager.toggleLike(postId);
-    if (updatedPost) {
-        const icon = button.querySelector('i');
-        icon.className = `bi ${updatedPost.liked ? 'bi-heart-fill' : 'bi-heart'}`;
+  const updatedPost = PostManager.toggleLike(postId);
+  if (!updatedPost) return;
 
-        // Atualiza contador de likes (se existir)
-        const likesCounter = button.closest('.post').querySelector('.likes-count');
-        if (likesCounter) {
-            likesCounter.textContent = `${updatedPost.likes} curtida${updatedPost.likes !== 1 ? 's' : ''}`;
-        }
+  const icon = button.querySelector('i');
+  icon.className = `bi ${updatedPost.liked ? 'bi-heart-fill' : 'bi-heart'}`;
+
+  button.classList.toggle('liked', updatedPost.liked);
+
+  let likesCounter = button.parentElement.querySelector('.likes-count');
+
+  if (updatedPost.likes > 0) {
+    if (!likesCounter) {
+      likesCounter = document.createElement('span');
+      likesCounter.className = 'likes-count liked';
+      button.insertAdjacentElement('afterend', likesCounter);
     }
+    likesCounter.textContent = formatLikes(updatedPost.likes);
+  } else {
+    if (likesCounter) likesCounter.remove();
+  }
+}
+
+
+function formatLikes(num) {
+  if (num >= 1000000) return (num / 1000000).toFixed(1).replace('.0', '') + ' mi';
+  if (num >= 1000) return (num / 1000).toFixed(1).replace('.0', '') + ' mil';
+  return num.toString();
 }
 
 // Carrega posts ao iniciar
