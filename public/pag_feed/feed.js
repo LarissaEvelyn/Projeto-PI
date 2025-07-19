@@ -108,9 +108,11 @@ function renderPost(post) {
             </div>
             <div class="post-content">${post.content}</div>
             <div class="actions">
-                <button class="curtir" onclick="toggleCurtir(this, ${post.id})">
-                    <i class="bi ${post.liked ? 'bi-heart-fill' : 'bi-heart'}"></i>
-                </button>
+                <div class="like-group">
+                    <button class="curtir" onclick="toggleCurtir(this, ${post.id})">
+                        <i class="bi ${post.liked ? 'bi-heart-fill' : 'bi-heart'}"></i>
+                    </button>
+                </div>
                 <button class="commentar">
                     <i class="bi bi-chat-square-text"></i>
                 </button>

@@ -264,3 +264,9 @@ textarea {
   color: #ff2d75;
   font-weight: 500;
 }
+
+.like-group {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* controla a distância entre o coração e o número */
+}
