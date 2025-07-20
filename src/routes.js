@@ -1,5 +1,6 @@
 import express from 'express';
 import Notificacao from './models/notif_models.js';
+import Postagens from './models/post_models.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -62,6 +63,27 @@ router.delete('/notificacoes/:id', async (req, res, next) => {
     res.sendStatus(204);
   } catch (error) {
     next(error);
+  }
+});
+
+//Rotas do Feed
+router.post('/postagens', async (req, res) => {
+  try {
+    const { autor, conteudo } = req.body;
+    const createdPost = await Postagens.create({ autor, conteudo });
+    res.status(201).json(createdPost);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.get('/postagens', async (req, res) => {
+  try {
+    const { autor } = req.query;
+    const posts = await Postagens.read(autor ? 'autor' : null, autor);
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao buscar postagens' });
   }
 });
 

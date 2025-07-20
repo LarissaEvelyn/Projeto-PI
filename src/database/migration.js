@@ -43,6 +43,16 @@ const extracurriculares = `
  
   await db.run(professor);
   
+  const postagens = `
+  CREATE TABLE Postagens (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    autor TEXT NOT NULL,
+    conteudo TEXT NOT NULL,
+    time DATETIME DEFAULT CURRENT_TIMESTAMP
+  )`;
+
+  await db.run(postagens);
+
   }
  
 export default { up };

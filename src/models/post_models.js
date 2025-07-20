@@ -1,33 +1,42 @@
-// ✅ post_models.js
-import { posts } from '../database/database.js';
+import Database from '../database/database.js';
 
-function create({ author, content }) {
-  if (!author || !content) {
+async function create({ autor, conteudo }) {
+  const db = await Database.connect();
+  
+  if (!autor || !conteudo) {
     throw new Error('Autor e conteúdo são obrigatórios');
   }
 
-  const newPost = {
-    id: uuidv4(),
-    author,
-    content,
-    likes: 0,
-    comments: [],
-    createdAt: new Date().toISOString(),
-  };
+  const sql = `
+    INSERT INTO Postagens (autor, conteudo)
+    VALUES (?, ?)
+  `;
 
-  posts.unshift(newPost);
-  return newPost;
+  const { lastID } = await db.run(sql, [autor, conteudo]);
+  return await readById(lastID);
 }
 
-function read() {
-  return posts;
+async function read(field, value) {
+  const db = await Database.connect();
+  
+  let sql = `SELECT id, autor, conteudo FROM Postagens`;
+  const params = [];
+
+  if (field && value) {
+    sql += ` WHERE ${field} = ?`;
+    params.push(value);
+  }
+
+  sql += ` ORDER BY Time DESC`;
+  
+  return await db.all(sql, params);
 }
 
-function like(id) {
-  const post = posts.find(p => p.id === id);
-  if (!post) throw new Error('Post não encontrado');
-  post.likes += 1;
-  return post;
-}
+//function like(id) {
+//  const post = posts.find(p => p.id === id);
+//  if (!post) throw new Error('Post não encontrado');
+//  post.likes += 1;
+//  return post;
+//}
 
-export default { create, read, like };
+export default { create, read };
