@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Salva no sessionStorage (opcional)
       sessionStorage.setItem('usuarioLogado', emailInput);
       // Redireciona para tela inicial
-      window.location.href = '../pag_inicial/tela_inicial.html';
+      window.location.href = '../tela_inicial/tela_inicial.html';
     } else {
       alert('E-mail ou senha incorretos!');
     }
