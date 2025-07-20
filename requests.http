@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:3000
+
+
+### 1. Criar novo perfil
+POST {{baseUrl}}/api/perfil
+Content-Type: application/json
+
+
+{
+  "nome": "Lara Pereira Ramalho",
+  "email": "lara.ramalho@academico.ifpb.edu.br",
+  "senha": "ifpb",
+  "instituicao": "IFPB",
+  "telefone": "(83) 98345-9679"
+}
+
+
+### 2. Listar todos os perfis
+GET {{baseUrl}}/api/perfil
+
+
+
+
+### 3. Obter perfil por ID (substitua :id pelo ID real)
+GET {{baseUrl}}/api/perfil/1
+
+
+### 4. Atualizar perfil (substitua :id pelo ID real)
+PUT {{baseUrl}}/api/perfil/1
+Content-Type: application/json
+
+
+{
+  "nome": "Lara Pereira Ramalho",
+  "telefone": "(83) 98345-9679"
+}
+
+
+### 5. Excluir perfil (substitua :id pelo ID real)
+DELETE {{baseUrl}}/api/perfil/1
+
+
+### 6. Testar página de perfil no navegador
+GET {{baseUrl}}/pag_modif_perfil/perfil.html

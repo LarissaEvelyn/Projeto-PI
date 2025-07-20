@@ -1,6 +1,7 @@
 import express from 'express';
 import Notificacao from './models/notif_models.js';
 import Postagens from './models/post_models.js';
+import Perfil from './models/perfil_models.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -86,6 +87,65 @@ router.get('/postagens', async (req, res) => {
     res.status(500).json({ message: 'Erro ao buscar postagens' });
   }
 });
+
+// Rotas de perfis (padronizadas para /api/perfil)
+router.post('/api/perfil', async (req, res, next) => {
+  try {
+    const perfil = req.body;
+    const criado = await Perfil.create(perfil);
+    res.status(201).json(criado);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+router.get('/api/perfil', async (req, res, next) => {
+  try {
+    const { text } = req.query;
+    const resultado = await Perfil.read('text', text);
+    res.json(resultado);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+router.get('/api/perfil/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const resultado = await Perfil.readById(id);
+    res.json(resultado);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+router.put('/api/perfil/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const perfil = req.body;
+    const atualizado = await Perfil.update(id, perfil); // <-- CORRIGIDO
+    console.log('Atualizado', atualizado);
+    res.json(atualizado);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+router.delete('/api/perfil/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await Perfil.remove(id);
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 // Middleware 404
 router.use((req, res) => {
