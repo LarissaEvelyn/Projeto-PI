@@ -1,5 +1,5 @@
 function scrollCategories(direction) {
-  const container = document.getElementById("categoriesContainer");
+  const container = document.getElementById("categoryContainer");
   const scrollAmount = 300; // Ajuste este valor conforme necessário
   
   container.scrollBy({
