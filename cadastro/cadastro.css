@@ -1,0 +1,94 @@
+body {
+  background: linear-gradient(to top, #d3b0dd, #8c52ff);
+  background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/36d8afcf-5e1c-4b0b-95f1-ea7903d311fa/dda6btz-3ac25a97-4a7b-45f0-b0f0-babaef7aab2c.jpg/v1/fill/w_1024,h_597,q_75,strp/evening_classroom_by_lazyremnant_dda6btz-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTk3IiwicGF0aCI6IlwvZlwvMzZkOGFmY2YtNWUxYy00YjBiLTk1ZjEtZWE3OTAzZDMxMWZhXC9kZGE2YnR6LTNhYzI1YTk3LTRhN2ItNDVmMC1iMGYwLWJhYmFlZjdhYWIyYy5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.2fq440VYms6x_FQ2SKmRjxiz7JmQ_sEmb30B5_e_iR0');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.login-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 350px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  }
+
+ input {
+     padding: 10px;
+     border: 1px solid #bbb;
+     outline: none;
+     font-size: 14px;
+     border-radius: 5px;
+     color: #000;
+     width: 90%;
+     margin-bottom: 10px;
+ }
+
+ button {
+     background-color: #8c52ff;
+     border: none;
+     padding: 12px;
+     width: 100%;
+     border-radius: 8px;
+     color: white;
+     font-size: 14px;
+     font-weight: bold;
+ }
+
+ button:hover {
+     background-color: #d3b0dd;
+     cursor: pointer;
+ }
+
+ .login-container h1 {
+  font-family: cursive;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.login-container h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #eee;
+}
+
+.login-container p {
+  font-size: 0.9rem;
+  color: #ddd;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+  .lobster-regular {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+  }
+  
+  .arizonia-regular h1 {
+  font-family: "Arizonia", cursive;
+  font-weight: 700px;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Search {
+    color: #0097b2; 
+  }
+
+.Academy{
+    color: #000;
+  }

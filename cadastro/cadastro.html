@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Academy - Cadastro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&family=Lobster&family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="cadastro.css" />
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="lobster-regular">
+            <span class="Search">Search</span> <span class="Academy">Academy</span>
+        </div>
+        <div class="arizonia-regular">
+            <h1>Cadastro</h1>
+        </div>
+        <form id="registerForm">
+            <input type="email" id="email" name="email" placeholder="E-mail" required />
+            <input type="password" id="password" name="password" placeholder="Senha" required />
+            <input type="tel" id="telefone" name="telefone" placeholder="Telefone" pattern="[0-9\s\-\+\(\)]{8,15}" title="Digite um número de telefone válido" required />
+            <input type="text" id="instituicao" name="instituicao" placeholder="Instituição" required />
+            <button type="submit">Cadastrar</button>
+        </form>
+        
+        <p style="margin-top: 15px; text-align: center;">
+            Já tem uma conta? <a href="../public/login/login.html">Faça login</a>
+        </p>
+    </div>
+
+    <script type="module" src="cadastro.js"></script>
+</body>
+
+</html>
+
