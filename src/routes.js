@@ -2,6 +2,7 @@ import express from 'express';
 import Notificacao from './models/notif_models.js';
 import Postagens from './models/post_models.js';
 import Perfil from './models/perfil_models.js';
+import Usuario from './models/usuarios_models.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -12,7 +13,7 @@ const __dirname = dirname(__filename);
 
 // Rota raiz - Página de login
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/login/login.html'));
+  res.sendFile(path.join(__dirname, '../public/cadastro/cadastro.html'));
 });
 
 //  Rotas de notificações
@@ -145,7 +146,17 @@ router.delete('/api/perfil/:id', async (req, res, next) => {
   }
 });
 
-
+// Cadastro
+router.post('/cadastro', async (req, res, next) => {
+  try {
+    const {nome, email, senha, instituicao, telefone} = req.body;
+    const criado = await Usuario.create({ nome, email, senha, instituicao, telefone });
+    console.log(nome)
+    res.status(201).json(criado);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Middleware 404
 router.use((req, res) => {

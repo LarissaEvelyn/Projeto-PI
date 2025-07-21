@@ -1,5 +1,5 @@
 // ✅ usuarios_models.js
-import { usuarios, sessaoAtiva as state } from '../database/database.js';
+import Database from '../database/database.js';
 
 function login(email, senha) {
   const usuario = usuarios.find(u => u.email === email);
@@ -22,4 +22,15 @@ function getPerfil() {
   return state.sessaoAtiva;
 }
 
-export default { login, logout, getPerfil };
+async function create({ nome, email, senha, instituicao, telefone }){
+  const db = await Database.connect()
+  const sql = `
+    INSERT INTO Estudante (nome, email, senha, instituicao, telefone )
+    VALUES (?, ?, ?, ?, ?)
+  `;
+
+  const { lastID } = await db.run(sql, [nome, email, senha, instituicao, telefone]);
+  return lastID;
+}
+
+export default { login, logout, getPerfil, create };

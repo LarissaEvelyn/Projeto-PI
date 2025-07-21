@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Arizonia&family=Lobster&family=Raleway:wght@100..900&display=swap" rel="stylesheet">
 
     <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="cadastro.css" />
+    <link rel="stylesheet" href="/cadastro/cadastro.css" />
 </head>
 
 <body>
@@ -23,6 +23,7 @@
             <h1>Cadastro</h1>
         </div>
         <form id="registerForm">
+            <input type="text" id="nome" name="nome" placeholder="Nome" required />
             <input type="email" id="email" name="email" placeholder="E-mail" required />
             <input type="password" id="password" name="password" placeholder="Senha" required />
             <input type="tel" id="telefone" name="telefone" placeholder="Telefone" pattern="[0-9\s\-\+\(\)]{8,15}" title="Digite um número de telefone válido" required />
@@ -31,11 +32,11 @@
         </form>
         
         <p style="margin-top: 15px; text-align: center;">
-            Já tem uma conta? <a href="../public/login/login.html">Faça login</a>
+            Já tem uma conta? <a href="/login/login.html">Faça login</a>
         </p>
     </div>
 
-    <script type="module" src="cadastro.js"></script>
+    <script type="module" src="/cadastro/cadastro.js"></script>
 </body>
 
 </html>

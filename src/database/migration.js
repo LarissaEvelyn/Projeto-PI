@@ -11,7 +11,7 @@ async function up() {
       Senha VARCHAR(20),
       Instituicao VARCHAR(40),
       Telefone VARCHAR(15)
-)`;
+    )`;
  
   await db.run(estudante);
     
@@ -20,7 +20,7 @@ const extracurriculares = `
       Cod INTEGER PRIMARY KEY,
       Nome VARCHAR(40),
       Descricao VARCHAR(100)
-      )`;;
+    )`;
  
   await db.run(extracurriculares);
 
@@ -29,7 +29,7 @@ const extracurriculares = `
       Cod INTEGER PRIMARY KEY,
       Descricao VARCHAR(100),
       Data_emissao DATE
-      )`;
+    )`;
  
   await db.run(notificacoes);
    
@@ -39,7 +39,7 @@ const extracurriculares = `
       Email VARCHAR(40),
       Nome VARCHAR(40),
       Senha VARCHAR(20)
-      )`;
+    )`;
  
   await db.run(professor);
   
@@ -53,6 +53,17 @@ const extracurriculares = `
 
   await db.run(postagens);
 
-  }
+  const curtida = `
+  CREATE TABLE Curtido (
+  cod_estu INTEGER,
+  id_post INTEGER,
+  PRIMARY KEY (cod_estu, id_post),
+  FOREIGN KEY (cod_estu) REFERENCES Estudante (Cod_Estudante)
+  FOREIGN KEY (id_post) REFERENCES Postagens (id)
+  )`;
+
+  await db.run(curtida);
+
+}
  
 export default { up };
