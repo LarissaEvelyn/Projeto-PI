@@ -12,7 +12,7 @@ const __dirname = dirname(__filename);
 
 // Rota raiz - Página de login
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/pag_login/login.html'));
+  res.sendFile(path.join(__dirname, '../public/login/login.html'));
 });
 
 //  Rotas de notificações
