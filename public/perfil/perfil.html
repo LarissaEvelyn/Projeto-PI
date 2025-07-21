@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,19 +8,45 @@
   <link rel="stylesheet" href="perfil.css" />
   <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
   <style>
-    .icon-button .iconify { width: 40px; height: 40px; }
-    .icon-button { background: transparent; border: none; cursor: pointer; }
-    .profile-pic img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; cursor: pointer; }
-    .profile-pic.small img { width: 40px; height: 40px; }
-    .curriculo-link { display: inline-block; margin-top: 10px; color: #0066cc; text-decoration: underline; }
+    .icon-button .iconify {
+      width: 40px;
+      height: 40px;
+    }
+
+
+    .icon-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+
+    .profile-pic img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+
+    .profile-pic.small img {
+      width: 40px;
+      height: 40px;
+    }
   </style>
 </head>
+
+
 <body>
+
+
   <header>
-    <a href="../pag_inicial/tela_inicial.html" class="lobster-regular">
+    <a href="../tela_inicial/tela_inicial.html" class="lobster-regular">
       <div class="lobster-regular">
         <span class="Search">Search</span> <span class="Academy">Academy</span>
       </div>
@@ -30,12 +57,14 @@
     </div>
     <div class="header-right">
       <div class="icons">
-        <a href="../pag_modif_perfil/perfil.html">
+        <!-- Ícone de perfil (branco) -->
+        <a href="../perfil/perfil.html">
           <button class="icon-button">
             <span class="iconify" data-icon="mingcute:user-4-fill" style="color: white;"></span>
           </button>
         </a>
-        <a href="../pag_notificacoes/notif.html">
+        <!-- Ícone de notificação (amarelo) -->
+        <a href="../notificacoes/notif.html">
           <button class="icon-button">
             <span class="iconify" data-icon="mingcute:notification-line" style="color: #FFD700;"></span>
           </button>
@@ -43,6 +72,8 @@
       </div>
     </div>
   </header>
+
+
   <div class="content">
     <div class="profile-card">
       <div class="profile-pic" style="text-align: center;">
@@ -50,112 +81,54 @@
         <span>Foto de perfil</span>
         <input type="file" id="photoInput" accept="image/*" style="display: none;" />
       </div>
+
+
       <div class="profile-info">
         <h2>Perfil</h2>
-        <form id="profileForm">
-          <input type="hidden" id="studentId" value="1">
-          <label for="username">Nome completo</label>
-          <input type="text" id="username" placeholder="Nome completo" required />
+        <form>
+          <label for="username">Nome de usuário</label>
+          <input type="text" id="username" placeholder="Username" value="lara.ramalho@academico.ifpb.edu.br" />
+
+
           <label for="email">E-mail</label>
-          <input type="email" id="email" placeholder="E-mail" required />
-          <label for="password">Senha (deixe em branco para manter)</label>
-          <input type="password" id="password" placeholder="Nova senha" />
+          <input type="email" id="email" placeholder="E-mail" />
+          <label for="password">Senha</label>
+          <input type="password" id="password" placeholder="Senha" />
           <label for="institution">Instituição</label>
           <input type="text" id="institution" placeholder="Digite sua instituição de ensino" />
           <label for="phone">Telefone</label>
           <input type="text" id="phone" placeholder="Telefone" />
           <label for="resume">Anexe seu currículo</label>
-          <input type="file" id="resume" name="resume" accept=".pdf">
-          <div id="curriculoContainer"></div>
-          <br>
+          <input type="file" name="resume"><br><br>
+
+
           <button type="submit">Salvar</button>
         </form>
       </div>
     </div>
   </div>
+
+
   <script>
-  async function loadStudentData() {
-    try {
-      const studentId = document.getElementById('studentId').value;
-      const response = await fetch(`/api/perfil/${studentId}`);
-      if (!response.ok) throw new Error('Erro ao carregar dados do estudante');
-      const student = await response.json();
+    const largeProfilePic = document.getElementById('largeProfilePic');
+    const photoInput = document.getElementById('photoInput');
 
-      document.getElementById('username').value = student.Nome || '';
-      document.getElementById('email').value = student.Email || '';
-      document.getElementById('institution').value = student.Instituicao || '';
-      document.getElementById('phone').value = student.Telefone || '';
-      if (student.Foto_url) {
-        document.getElementById('largeProfilePic').src = student.Foto_url;
-      }
 
-      const container = document.getElementById('curriculoContainer');
-      container.innerHTML = student.Curriculo_path
-        ? `<a href="${student.Curriculo_path}" class="curriculo-link" download>Baixar currículo atual</a>`
-        : '';
-    } catch (error) {
-      console.error('Erro:', error);
-      alert('Falha ao carregar dados do perfil');
-    }
-  }
-
-  async function saveProfile(event) {
-    event.preventDefault();
-
-    const studentId = document.getElementById('studentId').value;
-    const perfilData = {
-      Nome: document.getElementById('username').value,
-      Email: document.getElementById('email').value,
-      Instituicao: document.getElementById('institution').value,
-      Telefone: document.getElementById('phone').value,
-      Senha: document.getElementById('password').value || undefined
-    };
-
-    Object.keys(perfilData).forEach(key => {
-      if (perfilData[key] === '' && key !== 'Senha') {
-        delete perfilData[key];
+    photoInput.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          largeProfilePic.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
       }
     });
+  </script>
 
-    try {
-      const response = await fetch(`/api/perfil/${studentId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(perfilData)
-      });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Erro ao atualizar perfil');
-      }
+  <script src="perfil.js" type="module"></script>
+</body>
 
-      const result = await response.json();
-      alert('Perfil atualizado com sucesso!');
 
-      if (result.Foto_url) {
-        document.getElementById('largeProfilePic').src = result.Foto_url;
-      }
-
-      loadStudentData();
-    } catch (error) {
-      console.error('Erro:', error);
-      alert(`Falha ao atualizar perfil: ${error.message}`);
-    }
-  }
-
-  document.getElementById('photoInput').addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (file && file.type.match('image.*')) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        document.getElementById('largeProfilePic').src = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('profileForm').addEventListener('submit', saveProfile);
-    loadStudentData();
-  });
-</script>
+</html>
