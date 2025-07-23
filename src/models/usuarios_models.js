@@ -1,17 +1,22 @@
 // ✅ usuarios_models.js
 import Database from '../database/database.js';
 
-function login(email, senha) {
-  const usuario = usuarios.find(u => u.email === email);
+// ...existing code...
+
+async function login(email, senha) {
+  const db = await Database.connect();
+  const sql = `SELECT * FROM Estudante WHERE email = ?`;
+  const usuario = await db.get(sql, [email]);
   if (!usuario || usuario.senha !== senha) {
     throw new Error('Credenciais inválidas');
   }
-
   const { senha: _, ...usuarioSemSenha } = usuario;
-  state.sessaoAtiva = usuarioSemSenha;
   return usuarioSemSenha;
 }
 
+// ...existing code...
+
+export default { login, logout, getPerfil, create, verificarCadastro };
 function logout() {
   state.sessaoAtiva = null;
   return true;
@@ -33,4 +38,17 @@ async function create({ nome, email, senha, instituicao, telefone }){
   return lastID;
 }
 
-export default { login, logout, getPerfil, create };
+async function verificarCadastro(email) {
+  const db = await Database.connect();
+  const sql = `SELECT * FROM Estudante WHERE email = ?`;
+  const usuario = await db.get(sql, [email]);
+  if (usuario) {
+    // Usuário já cadastrado, deve ser redirecionado para login
+    return { cadastrado: true };
+  } else {
+    // Usuário não cadastrado
+    return { cadastrado: false };
+  }
+}
+
+

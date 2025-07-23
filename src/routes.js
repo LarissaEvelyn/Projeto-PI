@@ -6,6 +6,7 @@ import Usuario from './models/usuarios_models.js'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { Database } from 'sqlite-async';
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
@@ -153,6 +154,46 @@ router.post('/cadastro', async (req, res, next) => {
     const criado = await Usuario.create({ nome, email, senha, instituicao, telefone });
     console.log(nome)
     res.status(201).json(criado);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Verificação de cadastro de usuário
+router.post('/verificar-cadastro', async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    const resultado = await Usuario.verificarCadastro(email);
+    if (resultado.cadastrado) {
+      // Usuário já cadastrado, informar para redirecionar para login
+      res.status(200).json({ redirect: '/login', message: 'Usuário já cadastrado. Redirecionando para login.' });
+    } else {
+      // Usuário não cadastrado, pode prosseguir com cadastro
+      res.status(200).json({ redirect: null, message: 'Usuário não cadastrado. Pode prosseguir com cadastro.' });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Rota de login
+router.post('/login', async (req, res, next) => {
+  try {
+    const { email, senha } = req.body;
+    // Consulta o usuário no banco de dados
+    const db = await Database.connect(); // ou Database.connect(), dependendo do seu model
+    const sql = `SELECT * FROM Estudante WHERE email = ?`;
+    const usuario = await db.get(sql, [email]);
+
+    if (!usuario || usuario.senha !== senha) {
+      return res.status(401).json({ message: 'E-mail ou senha incorretos!' });
+    }
+
+    // Não envie a senha para o frontend
+    const { senha: _, ...usuarioSemSenha } = usuario;
+    // Aqui você pode salvar sessão/cookie se quiser
+
+    res.status(200).json({ message: 'Login bem-sucedido!', usuario: usuarioSemSenha });
   } catch (error) {
     next(error);
   }
