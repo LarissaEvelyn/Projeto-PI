@@ -90,6 +90,73 @@ router.get('/postagens', async (req, res) => {
   }
 });
 
+router.get('/postagens/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const post = await Postagens.readById(id);
+    if (!post) return res.status(404).json({ message: 'Post não encontrado' });
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao buscar postagem' });
+  }
+});
+
+router.put('/postagens/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { autor, conteudo } = req.body;
+    const atualizado = await Postagens.update(id, { autor, conteudo });
+    res.json(atualizado);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao atualizar postagem' });
+  }
+});
+
+router.delete('/postagens/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Postagens.remove(id);
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao deletar postagem' });
+  }
+});
+
+// Dar like em uma postagem
+router.post('/postagens/:id/like', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { codEstudante } = req.body; // precisa passar no front quem é o usuário logado
+    const total = await Postagens.like(codEstudante, id);
+    res.json({ likes: total });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Remover like
+router.delete('/postagens/:id/like', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { codEstudante } = req.body;
+    const total = await Postagens.unlike(codEstudante, id);
+    res.json({ likes: total });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Obter total de likes
+router.get('/postagens/:id/likes', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const total = await Postagens.getLikes(id);
+    res.json({ likes: total });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao buscar likes' });
+  }
+});
+
 // Rotas de perfis (padronizadas para /api/perfil)
 router.post('/api/perfil', async (req, res, next) => {
   try {

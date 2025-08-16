@@ -233,40 +233,25 @@ textarea {
   object-fit: cover;
 }
 
+/* Like com coração */
+.curtir.liked i,
+.bi-heart-fill {
+  color: #ff2d75 !important;
+}
+
+/* Contador de likes */
+.like-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .likes-count {
   font-size: 0.95rem;
   color: #444;
-  align-self: center;
-  margin-left: 4px;
-}
-
-.curtir {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: #666;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-}
-
-.curtir.liked i {
-  color: #ff2d75;
-}
-
-.likes-count {
-  margin-left: 6px;
-  font-size: 1rem;
-  color: #666;
 }
 
 .likes-count.liked {
   color: #ff2d75;
   font-weight: 500;
-}
-
-.like-group {
-  display: flex;
-  align-items: center;
-  gap: 4px; /* controla a distância entre o coração e o número */
 }

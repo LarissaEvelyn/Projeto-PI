@@ -1,178 +1,212 @@
-// Gerenciador de posts
-const PostManager = {
-    storageKey: 'searchAcademyPosts',
+// Funções de API
 
-    init() {
-        if (!this.getPosts().length) {
-            this.addPost({
-                author: '@SearchAcademy',
-                content: 'Seja Bem-Vindo(a) ao Feed!! 😁'
-            });
-        }
-    },
+// Buscar todos os posts
+async function fetchPosts() {
+  const res = await fetch('/postagens');
+  if (!res.ok) throw new Error('Erro ao carregar posts');
+  return await res.json();
+}
 
-    getPosts() {
-        try {
-            return JSON.parse(localStorage.getItem(this.storageKey)) || [];
-        } catch (e) {
-            console.error("Erro ao ler posts:", e);
-            return [];
-        }
-    },
+// Criar novo post
+async function createPost(content) {
+  const res = await fetch('/postagens', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ autor: '@voce', conteudo: content })
+  });
+  if (!res.ok) throw new Error('Erro ao criar post');
+  return await res.json();
+}
 
-    addPost(postData) {
-        const posts = this.getPosts();
-        const newPost = {
-            id: Date.now(),
-            author: postData.author || '@voce',
-            content: postData.content,
-            time: this.getCurrentTime(),
-            likes: 0,
-            liked: false
-        };
+// Atualizar post
+async function updatePost(id, content) {
+  const res = await fetch(`/postagens/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ autor: '@voce', conteudo: content })
+  });
+  if (!res.ok) throw new Error('Erro ao atualizar post');
+  return await res.json();
+}
 
-        posts.unshift(newPost);
-        this.savePosts(posts);
-        return newPost;
-    },
+// Deletar post
+async function deletePost(id) {
+  const res = await fetch(`/postagens/${id}`, { method: 'DELETE' });
+  if (!res.ok) throw new Error('Erro ao deletar post');
+}
 
-    savePosts(posts) {
-        localStorage.setItem(this.storageKey, JSON.stringify(posts));
-    },
+// Dar like
+async function likePost(id, codEstudante) {
+  const res = await fetch(`/postagens/${id}/like`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ codEstudante })
+  });
+  if (!res.ok) throw new Error('Erro ao curtir post');
+  return await res.json();
+}
 
-    toggleLike(postId) {
-        const posts = this.getPosts();
-        const post = posts.find(p => p.id === postId);
+// Remover like
+async function unlikePost(id, codEstudante) {
+  const res = await fetch(`/postagens/${id}/like`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ codEstudante })
+  });
+  if (!res.ok) throw new Error('Erro ao remover like');
+  return await res.json();
+}
 
-        if (post) {
-            post.liked = !post.liked;
-            post.likes += post.liked ? 1 : -1;
-            this.savePosts(posts);
-            return post;
-        }
-        return null;
-    },
-
-    getCurrentTime() {
-        const now = new Date();
-        const diff = new Date() - now;
-
-        if (diff < 60000) return 'agora mesmo';
-        if (diff < 3600000) return `${Math.floor(diff / 60000)} min atrás`;
-        if (diff < 86400000) return `${Math.floor(diff / 3600000)}h atrás`;
-        return now.toLocaleDateString();
-    }
-};
-
-// Inicializa o PostManager
-PostManager.init();
+// Buscar total de likes
+async function fetchLikes(id) {
+  const res = await fetch(`/postagens/${id}/likes`);
+  if (!res.ok) throw new Error('Erro ao buscar likes');
+  return await res.json();
+}
 
 // Funções de UI
+
 function mostrarFormulario() {
-    const form = document.getElementById("formularioPostagem");
-    form.style.display = form.style.display === "none" ? "block" : "none";
-    if (form.style.display === "block") {
-        document.getElementById("novaPostagemTexto").focus();
-    }
-}
-
-function adicionarPostagem(event) {
-    event.preventDefault();
-    const textarea = document.getElementById("novaPostagemTexto");
-    const texto = textarea.value.trim();
-
-    if (!texto) {
-        alert("Por favor, escreva algo antes de publicar!");
-        return;
-    }
-
-    const newPost = PostManager.addPost({ content: texto });
-    renderPost(newPost);
-
-    textarea.value = "";
-    mostrarFormulario();
-    window.dispatchEvent(new Event('postsUpdated'));
-}
-
-function renderPost(post) {
-    const container = document.querySelector(".post-container");
-
-    const postHTML = `
-        <div class="post" data-id="${post.id}">
-            <div>
-                <span class="username">
-                    <i class="bi bi-person-circle"></i>
-                    ${post.author}
-                </span>
-                <span class="timestamp">${post.time}</span>
-            </div>
-            <div class="post-content">${post.content}</div>
-            <div class="actions">
-                <div class="like-group">
-                    <button class="curtir" onclick="toggleCurtir(this, ${post.id})">
-                        <i class="bi ${post.liked ? 'bi-heart-fill' : 'bi-heart'}"></i>
-                    </button>
-                </div>
-                <button class="commentar">
-                    <i class="bi bi-chat-square-text"></i>
-                </button>
-            </div>
-        </div>
-    `;
-
-    container.insertAdjacentHTML("afterbegin", postHTML);
-}
-
-function toggleCurtir(button, postId) {
-  const updatedPost = PostManager.toggleLike(postId);
-  if (!updatedPost) return;
-
-  const icon = button.querySelector('i');
-  icon.className = `bi ${updatedPost.liked ? 'bi-heart-fill' : 'bi-heart'}`;
-
-  button.classList.toggle('liked', updatedPost.liked);
-
-  let likesCounter = button.parentElement.querySelector('.likes-count');
-
-  if (updatedPost.likes > 0) {
-    if (!likesCounter) {
-      likesCounter = document.createElement('span');
-      likesCounter.className = 'likes-count liked';
-      button.insertAdjacentElement('afterend', likesCounter);
-    }
-    likesCounter.textContent = formatLikes(updatedPost.likes);
-  } else {
-    if (likesCounter) likesCounter.remove();
+  const form = document.getElementById("formularioPostagem");
+  form.style.display = form.style.display === "none" ? "block" : "none";
+  if (form.style.display === "block") {
+    document.getElementById("novaPostagemTexto").focus();
   }
 }
 
+async function adicionarPostagem(event) {
+  event.preventDefault();
+  const textarea = document.getElementById("novaPostagemTexto");
+  const texto = textarea.value.trim();
 
-function formatLikes(num) {
-  if (num >= 1000000) return (num / 1000000).toFixed(1).replace('.0', '') + ' mi';
-  if (num >= 1000) return (num / 1000).toFixed(1).replace('.0', '') + ' mil';
-  return num.toString();
+  if (!texto) {
+    alert("Por favor, escreva algo antes de publicar!");
+    return;
+  }
+
+  try {
+    const newPost = await createPost(texto);
+    renderPost(newPost, true);
+    textarea.value = "";
+    mostrarFormulario();
+  } catch (e) {
+    alert("Erro ao criar postagem!");
+    console.error(e);
+  }
 }
 
-// Carrega posts ao iniciar
-document.addEventListener('DOMContentLoaded', () => {
-    const posts = PostManager.getPosts();
-    const container = document.querySelector(".post-container");
+async function renderPost(post, prepend = false) {
+  const container = document.querySelector(".post-container");
 
-    // Limpa o post estático de boas-vindas
-    container.innerHTML = '';
+  // Buscar likes do banco
+  const likesData = await fetchLikes(post.id);
 
-    // Renderiza todos os posts
-    posts.forEach(post => renderPost(post));
+  const postHTML = `
+    <div class="post" data-id="${post.id}">
+      <div>
+        <span class="username">
+          <i class="bi bi-person-circle"></i>
+          ${post.autor}
+        </span>
+        <span class="timestamp">${formatTime(post.time)}</span>
+      </div>
+      <div class="post-content">${post.conteudo}</div>
+      <div class="actions">
+        <div class="like-group">
+          <button class="curtir" onclick="toggleCurtir(this, ${post.id})">
+            <i class="bi bi-heart"></i>
+          </button>
+          <span class="likes-count">${likesData.likes} curtida(s)</span>
+        </div>
+        <button class="commentar">
+          <i class="bi bi-chat-square-text"></i>
+        </button>
+      </div>
+    </div>
+  `;
 
-    // Configura o formulário
-    document.getElementById("formularioPostagem").addEventListener("submit", adicionarPostagem);
-});
+  if (prepend) {
+    container.insertAdjacentHTML("afterbegin", postHTML);
+  } else {
+    container.insertAdjacentHTML("beforeend", postHTML);
+  }
+}
 
-// Atualiza quando posts são modificados em outras abas
-window.addEventListener('storage', (e) => {
-    if (e.key === PostManager.storageKey) {
-        const container = document.querySelector(".post-container");
-        container.innerHTML = '';
-        PostManager.getPosts().forEach(post => renderPost(post));
+function formatTime(dateString) {
+  const now = new Date();
+  const postDate = new Date(dateString);
+  const diff = now - postDate;
+
+  if (diff < 60000) return 'agora mesmo';
+  if (diff < 3600000) return `${Math.floor(diff / 60000)} min atrás`;
+  if (diff < 86400000) return `${Math.floor(diff / 3600000)}h atrás`;
+  return postDate.toLocaleDateString();
+}
+
+// Função que marca os corações já curtidos ao carregar a página
+async function carregarCurtidas() {
+  const codEstudante = 1; // substitua pelo usuário logado
+
+  try {
+    const postsCurtidos = await getPostsCurtidos(codEstudante); // array de IDs
+
+    postsCurtidos.forEach(postId => {
+      const button = document.querySelector(`.like-button[data-post-id="${postId}"]`);
+      if (button) {
+        const icon = button.querySelector('i');
+        icon.classList.add('bi-heart-fill');  // adiciona coração cheio
+        icon.classList.remove('bi-heart');    // remove coração vazio
+      }
+    });
+  } catch (e) {
+    console.error('Erro ao carregar curtidas:', e);
+  }
+}
+
+// Função já existente para alternar coração ao clicar
+async function toggleCurtir(button, postId) {
+  const icon = button.querySelector('i');
+  const isLiked = icon.classList.contains('bi-heart-fill');
+
+  try {
+    const codEstudante = 1;
+
+    let data;
+    if (isLiked) {
+      data = await unlikePost(postId, codEstudante);
+      icon.className = 'bi bi-heart';
+    } else {
+      data = await likePost(postId, codEstudante);
+      icon.className = 'bi bi-heart-fill';
     }
+
+    // Atualiza contador
+    let likesCounter = button.parentElement.querySelector('.likes-count');
+    likesCounter.textContent = `${data.likes} curtida(s)`;
+
+  } catch (e) {
+    console.error("Erro ao curtir:", e);
+  }
+}
+
+// Chama ao carregar a página
+window.addEventListener('DOMContentLoaded', carregarCurtidas);
+
+
+// Inicialização
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const container = document.querySelector(".post-container");
+  container.innerHTML = '';
+
+  try {
+    const posts = await fetchPosts();
+    for (const post of posts) {
+      await renderPost(post);
+    }
+  } catch (e) {
+    console.error("Erro ao carregar posts:", e);
+  }
+
+  document.getElementById("formularioPostagem").addEventListener("submit", adicionarPostagem);
 });
