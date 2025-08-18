@@ -8,11 +8,11 @@ class Perfil {
       `INSERT INTO Estudante (Nome, Email, Senha, Instituicao, Telefone)
        VALUES (?, ?, ?, ?, ?)`,
       [
-        perfil.Nome,
-        perfil.Email,
-        perfil.Senha,
-        perfil.Instituicao,
-        perfil.Telefone
+        perfil.nome,
+        perfil.email,
+        perfil.senha,
+        perfil.instituicao,
+        perfil.telefone
       ]
     );
     return this.readById(lastID);
