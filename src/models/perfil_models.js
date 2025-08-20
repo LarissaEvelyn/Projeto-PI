@@ -1,24 +1,7 @@
 import dbModule from '../database/database.js';
 
-
 class Perfil {
-  static async create(perfil) {
-    const db = await dbModule.connect();
-    const { lastID } = await db.run(
-      `INSERT INTO Estudante (Nome, Email, Senha, Instituicao, Telefone)
-       VALUES (?, ?, ?, ?, ?)`,
-      [
-        perfil.nome,
-        perfil.email,
-        perfil.senha,
-        perfil.instituicao,
-        perfil.telefone
-      ]
-    );
-    return this.readById(lastID);
-  }
-
-
+  // Lê todos os perfis ou filtra por campo/valor
   static async read(field, value) {
     const db = await dbModule.connect();
     let sql = `SELECT * FROM Estudante`;
@@ -32,7 +15,7 @@ class Perfil {
     return db.all(sql, params);
   }
 
-
+  // Lê perfil por ID
   static async readById(id) {
     const db = await dbModule.connect();
     const student = await db.get(
@@ -47,39 +30,37 @@ class Perfil {
     return student;
   }
 
-
+  // Atualiza perfil por ID
   static async update(id, data) {
     const db = await dbModule.connect();
    
     const updates = [];
     const params = [];
    
-    if (data.Nome) {
+    if (data.Nome !== undefined) {
       updates.push('Nome = ?');
       params.push(data.Nome);
     }
-    if (data.Email) {
+    if (data.Email !== undefined) {
       updates.push('Email = ?');
       params.push(data.Email);
     }
-    if (data.Instituicao) {
+    if (data.Instituicao !== undefined) {
       updates.push('Instituicao = ?');
       params.push(data.Instituicao);
     }
-    if (data.Telefone) {
+    if (data.Telefone !== undefined) {
       updates.push('Telefone = ?');
       params.push(data.Telefone);
     }
-    if (data.Senha) {
+    if (data.Senha !== undefined) {
       updates.push('Senha = ?');
       params.push(data.Senha);
     }
 
-
     if (updates.length === 0) {
       return this.readById(id);
     }
-
 
     const query = `
       UPDATE Estudante
@@ -97,22 +78,6 @@ class Perfil {
    
     return this.readById(id);
   }
-
-
-  static async remove(id) {
-    const db = await dbModule.connect();
-    const { changes } = await db.run(
-      'DELETE FROM Estudante WHERE Cod_estudante = ?',
-      [id]
-    );
-   
-    if (changes === 0) {
-      throw new Error('Estudante não encontrado');
-    }
-   
-    return true;
-  }
 }
-
 
 export default Perfil;
