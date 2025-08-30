@@ -158,27 +158,15 @@ router.get('/postagens/:id/likes', async (req, res) => {
 });
 
 // Rotas de perfis (padronizadas para /api/perfil)
-router.post('/api/perfil', async (req, res, next) => {
-  try {
-    const perfil = req.body;
-    const criado = await Perfil.create(perfil);
-    res.status(201).json(criado);
-  } catch (error) {
-    next(error);
-  }
-});
-
-
 router.get('/api/perfil', async (req, res, next) => {
   try {
     const { text } = req.query;
-    const resultado = await Perfil.read('text', text);
+    const resultado = await Perfil.read('Nome', text);
     res.json(resultado);
   } catch (error) {
     next(error);
   }
 });
-
 
 router.get('/api/perfil/:id', async (req, res, next) => {
   try {
@@ -190,12 +178,11 @@ router.get('/api/perfil/:id', async (req, res, next) => {
   }
 });
 
-
 router.put('/api/perfil/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const perfil = req.body;
-    const atualizado = await Perfil.update(id, perfil); // <-- CORRIGIDO
+    const perfilData = req.body;
+    const atualizado = await Perfil.update(id, perfilData);
     console.log('Atualizado', atualizado);
     res.json(atualizado);
   } catch (error) {
@@ -203,16 +190,6 @@ router.put('/api/perfil/:id', async (req, res, next) => {
   }
 });
 
-
-router.delete('/api/perfil/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    await Perfil.remove(id);
-    res.sendStatus(204);
-  } catch (error) {
-    next(error);
-  }
-});
 
 // Cadastro
 router.post('/cadastro', async (req, res, next) => {

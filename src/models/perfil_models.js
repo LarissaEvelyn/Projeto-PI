@@ -1,83 +1,59 @@
-import dbModule from '../database/database.js';
+import { PrismaClient } from '@prisma/client';
 
-class Perfil {
-  // Lê todos os perfis ou filtra por campo/valor
-  static async read(field, value) {
-    const db = await dbModule.connect();
-    let sql = `SELECT * FROM Estudante`;
-    let params = [];
-   
-    if (field && value) {
-      sql += ` WHERE ${field} LIKE ?`;
-      params.push(`%${value}%`);
-    }
-   
-    return db.all(sql, params);
+const prisma = new PrismaClient();
+
+// Ler todos os perfis ou filtrar por campo/valor
+async function read(field, value) {
+  if (field && value) {
+    return await prisma.estudante.findMany({
+      where: {
+        [field]: {
+          contains: value,
+          mode: 'insensitive',
+        },
+      },
+      orderBy: {
+        Cod_estudante: 'asc',
+      },
+    });
   }
 
-  // Lê perfil por ID
-  static async readById(id) {
-    const db = await dbModule.connect();
-    const student = await db.get(
-      'SELECT * FROM Estudante WHERE Cod_estudante = ?',
-      [id]
-    );
-   
-    if (!student) {
-      throw new Error('Estudante não encontrado');
-    }
-   
-    return student;
-  }
-
-  // Atualiza perfil por ID
-  static async update(id, data) {
-    const db = await dbModule.connect();
-   
-    const updates = [];
-    const params = [];
-   
-    if (data.Nome !== undefined) {
-      updates.push('Nome = ?');
-      params.push(data.Nome);
-    }
-    if (data.Email !== undefined) {
-      updates.push('Email = ?');
-      params.push(data.Email);
-    }
-    if (data.Instituicao !== undefined) {
-      updates.push('Instituicao = ?');
-      params.push(data.Instituicao);
-    }
-    if (data.Telefone !== undefined) {
-      updates.push('Telefone = ?');
-      params.push(data.Telefone);
-    }
-    if (data.Senha !== undefined) {
-      updates.push('Senha = ?');
-      params.push(data.Senha);
-    }
-
-    if (updates.length === 0) {
-      return this.readById(id);
-    }
-
-    const query = `
-      UPDATE Estudante
-      SET ${updates.join(', ')}
-      WHERE Cod_estudante = ?
-    `;
-   
-    params.push(id);
-   
-    const { changes } = await db.run(query, params);
-   
-    if (changes === 0) {
-      throw new Error('Nenhum registro atualizado');
-    }
-   
-    return this.readById(id);
-  }
+  return await prisma.estudante.findMany({
+    orderBy: {
+      Cod_estudante: 'asc',
+    },
+  });
 }
 
-export default Perfil;
+// Ler perfil por ID
+async function readById(id) {
+  const estudante = await prisma.estudante.findUnique({
+    where: {
+      Cod_estudante: Number(id),
+    },
+  });
+
+  if (!estudante) {
+    throw new Error('Estudante não encontrado');
+  }
+
+  return estudante;
+}
+
+// Atualizar perfil por ID
+async function update(id, { Nome, Email, Instituicao, Telefone, Senha }) {
+  return await prisma.estudante.update({
+    where: {
+      Cod_estudante: Number(id),
+    },
+    data: {
+      Nome,
+      Email,
+      Instituicao,
+      Telefone,
+      Senha,
+    },
+  });
+}
+
+export default { read, readById, update };
