@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Estudante {
+  Cod_estudante Int     @id @default(autoincrement())
+  Nome          String?
+  Email         String?
+  Senha         String?
+  Instituicao   String?
+  Telefone      String?
+  
+  Curtido Curtido[]
+}
+
+model Extracurriculares {
+  Cod       Int    @id @default(autoincrement())
+  Nome      String?
+  Descricao String?
+}
+
+model Notificacao {
+  Cod          Int      @id @default(autoincrement())
+  Descricao    String?
+  Data_emissao DateTime?
+}
+
+model Professor {
+  Cod_Professor Int     @id @default(autoincrement())
+  Email         String?
+  Nome          String?
+  Senha         String?
+}
+
+model Postagens {
+  id        Int      @id @default(autoincrement())
+  autor     String
+  conteudo  String
+  time      DateTime @default(now())
+  
+  Curtido Curtido[]
+}
+
+model Curtido {
+  cod_estu Int
+  id_post  Int
+  
+  estudante Estudante @relation(fields: [cod_estu], references: [Cod_estudante], onDelete: Cascade)
+  postagem  Postagens @relation(fields: [id_post], references: [id], onDelete: Cascade)
+  
+  @@id([cod_estu, id_post])
+}

@@ -1,0 +1,27 @@
+{
+  "posts": [
+    {
+      "autor": "João Silva",
+      "conteudo": "Conteúdo da primeira postagem"
+    },
+    {
+      "autor": "Maria Santos",
+      "conteudo": "Conteúdo da segunda postagem"
+    }
+  ],
+  "notifications": [
+    {
+      "Descricao": "Nova mensagem recebida",
+      "Data_emissao": "2024-01-15T10:00:00Z"
+    }
+  ],
+  "perfis": [
+    {
+      "Nome": "João Silva",
+      "Email": "joao@email.com",
+      "Senha": "senha123",
+      "Instituicao": "Universidade X",
+      "Telefone": "11999999999"
+    }
+  ]
+}

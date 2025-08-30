@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import router from './routes.js';
-import Seed from './database/seeders.js';
+import Seed from './prisma/seed.js';
 
 // Função principal async para permitir uso de await no Seed.up()
 async function main() {

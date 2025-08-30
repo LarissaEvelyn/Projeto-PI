@@ -1,81 +1,97 @@
-import Database from '../database/database.js';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 async function create({ autor, conteudo }) {
-  const db = await Database.connect();
-
   if (!autor || !conteudo) {
     throw new Error('Autor e conteúdo são obrigatórios');
   }
 
-  const sql = `
-    INSERT INTO Postagens (autor, conteudo)
-    VALUES (?, ?)
-  `;
-
-  const { lastID } = await db.run(sql, [autor, conteudo]);
-  return await readById(lastID);
+  return await prisma.postagens.create({
+    data: {
+      autor,
+      conteudo,
+    },
+  });
 }
 
 async function read(field, value) {
-  const db = await Database.connect();
-
-  let sql = `SELECT id, autor, conteudo, time FROM Postagens`;
-  const params = [];
-
   if (field && value) {
-    sql += ` WHERE ${field} = ?`;
-    params.push(value);
+    return await prisma.postagens.findMany({
+      where: {
+        [field]: value,
+      },
+      orderBy: {
+        time: 'desc',
+      },
+    });
+  } else {
+    return await prisma.postagens.findMany({
+      orderBy: {
+        time: 'desc',
+      },
+    });
   }
-
-  sql += ` ORDER BY time DESC`;
-  return await db.all(sql, params);
 }
 
 async function readById(id) {
-  const db = await Database.connect();
-  const sql = `SELECT id, autor, conteudo, time FROM Postagens WHERE id = ?`;
-  return await db.get(sql, [id]);
+  return await prisma.postagens.findUnique({
+    where: {
+      id: id,
+    },
+  });
 }
 
 async function update(id, { autor, conteudo }) {
-  const db = await Database.connect();
-  const sql = `
-    UPDATE Postagens 
-    SET autor = ?, conteudo = ?, time = CURRENT_TIMESTAMP
-    WHERE id = ?
-  `;
-  await db.run(sql, [autor, conteudo, id]);
-  return await readById(id);
+  return await prisma.postagens.update({
+    where: {
+      id: id,
+    },
+    data: {
+      autor,
+      conteudo,
+      time: new Date(), // Prisma entende o Date do JavaScript
+    },
+  });
 }
 
 async function remove(id) {
-  const db = await Database.connect();
-  const sql = `DELETE FROM Postagens WHERE id = ?`;
-  return await db.run(sql, [id]);
+  return await prisma.postagens.delete({
+    where: {
+      id: id,
+    },
+  });
 }
 
 // Adicionar like
 async function like(codEstudante, idPost) {
-  const db = await Database.connect();
-  const sql = `INSERT INTO Curtido (cod_estu, id_post) VALUES (?, ?)`;
-  await db.run(sql, [codEstudante, idPost]);
-  return getLikes(idPost);
+  return await prisma.curtido.create({
+    data: {
+      cod_estu: codEstudante,
+      id_post: idPost,
+    },
+  });
 }
 
 // Remover like
 async function unlike(codEstudante, idPost) {
-  const db = await Database.connect();
-  const sql = `DELETE FROM Curtido WHERE cod_estu = ? AND id_post = ?`;
-  await db.run(sql, [codEstudante, idPost]);
-  return getLikes(idPost);
+  return await prisma.curtido.delete({
+    where: {
+      cod_estu_id_post: {
+        cod_estu: codEstudante,
+        id_post: idPost,
+      },
+    },
+  });
 }
 
 // Contar likes de um post
 async function getLikes(idPost) {
-  const db = await Database.connect();
-  const sql = `SELECT COUNT(*) as total FROM Curtido WHERE id_post = ?`;
-  const result = await db.get(sql, [idPost]);
-  return result.total;
+  return await prisma.curtido.count({
+    where: {
+      id_post: idPost,
+    },
+  });
 }
 
 export default { create, read, readById, update, remove, like, unlike, getLikes };

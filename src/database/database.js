@@ -1,16 +1,8 @@
-import { resolve } from 'node:path';
-import { Database } from 'sqlite-async';
-export const investments = [];
-export const perfis = [];
-export const posts = [];
-export const notifications = [];
-
+import { PrismaClient } from '@prisma/client';
  
-const dbFile = resolve('src', 'database', 'db.sqlite');
+const prisma = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
  
-async function connect() {
-  return await Database.open(dbFile);
-}
- 
-export default { connect };
+export default prisma;
  
