@@ -23,5 +23,61 @@
       "instituicao": "Universidade X",
       "telefone": "11999999999"
     }
+  ],
+  "categorias": [
+    {
+      "nome": "Voluntariado",
+      "descricao": "Atividades voltadas para serviços voluntários",
+      "slug": "voluntariado",
+      "iconClass": "voluntariado--icon"
+    },
+    {
+      "nome": "Esportes",
+      "descricao": "Práticas esportivas e competições",
+      "slug": "esportes",
+      "iconClass": "esportes--icon"
+    },
+    {
+      "nome": "Arte e Cultura",
+      "descricao": "Oficinas de arte, música e teatro",
+      "slug": "arte-cultura",
+      "iconClass": "arte--icon"
+    },
+    {
+      "nome": "Tecnologia",
+      "descricao": "Cursos e projetos relacionados à tecnologia",
+      "slug": "tecnologia",
+      "iconClass": "tech--icon"
+    }
+  ],
+  "atividades": [
+    {
+      "titulo": "Projeto Social Comunidade",
+      "descricao": "Ajude em projetos sociais da sua cidade.",
+      "imagem": "/images/voluntariado1.jpg",
+      "url": "https://exemplo.com/voluntariado",
+      "slugCategoria": "voluntariado"
+    },
+    {
+      "titulo": "Torneio Interescolar",
+      "descricao": "Participe do campeonato de futebol escolar.",
+      "imagem": "/images/esporte1.jpg",
+      "url": "https://exemplo.com/esportes",
+      "slugCategoria": "esportes"
+    },
+    {
+      "titulo": "Oficina de Pintura",
+      "descricao": "Aprenda técnicas de pintura artística.",
+      "imagem": "/images/arte1.jpg",
+      "url": "https://exemplo.com/arte",
+      "slugCategoria": "arte-cultura"
+    },
+    {
+      "titulo": "Curso de Programação",
+      "descricao": "Aprenda lógica e programação do zero.",
+      "imagem": "/images/tech1.jpg",
+      "url": "https://exemplo.com/tecnologia",
+      "slugCategoria": "tecnologia"
+    }
   ]
 }
