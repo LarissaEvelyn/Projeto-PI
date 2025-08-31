@@ -2,22 +2,44 @@ import express from 'express';
 import Notificacao from './models/notif_models.js';
 import Postagens from './models/post_models.js';
 import Perfil from './models/perfil_models.js';
-import Usuario from './models/usuarios_models.js'
+import Usuario from './models/usuarios_models.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { Database } from 'sqlite-async';
 
 const router = express.Router();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Rota raiz - Página de login
+/* ==============================
+   ROTAS ESTÁTICAS
+================================*/
+
+// Rota raiz - Página de login/cadastro
 router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/cadastro/cadastro.html'));
 });
 
-//  Rotas de notificações
+// Página de login
+router.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/login/login.html'));
+});
+
+// Página principal (feed)
+router.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/feed/feed.html'));
+});
+
+// Página de perfil
+router.get('/perfil', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/perfil/perfil.html'));
+});
+
+
+/* ==============================
+   ROTAS DE NOTIFICAÇÕES
+================================*/
+
 router.post('/notificacoes', async (req, res, next) => {
   try {
     const notificacao = req.body;
@@ -69,7 +91,11 @@ router.delete('/notificacoes/:id', async (req, res, next) => {
   }
 });
 
-//Rotas do Feed
+
+/* ==============================
+   ROTAS DE POSTAGENS (FEED)
+================================*/
+
 router.post('/postagens', async (req, res) => {
   try {
     const { autor, conteudo } = req.body;
@@ -122,11 +148,11 @@ router.delete('/postagens/:id', async (req, res) => {
   }
 });
 
-// Dar like em uma postagem
+// Like
 router.post('/postagens/:id/like', async (req, res) => {
   try {
     const { id } = req.params;
-    const { codEstudante } = req.body; // precisa passar no front quem é o usuário logado
+    const { codEstudante } = req.body;
     const total = await Postagens.like(codEstudante, id);
     res.json({ likes: total });
   } catch (error) {
@@ -134,7 +160,7 @@ router.post('/postagens/:id/like', async (req, res) => {
   }
 });
 
-// Remover like
+// Unlike
 router.delete('/postagens/:id/like', async (req, res) => {
   try {
     const { id } = req.params;
@@ -146,7 +172,7 @@ router.delete('/postagens/:id/like', async (req, res) => {
   }
 });
 
-// Obter total de likes
+// Total de likes
 router.get('/postagens/:id/likes', async (req, res) => {
   try {
     const { id } = req.params;
@@ -157,7 +183,11 @@ router.get('/postagens/:id/likes', async (req, res) => {
   }
 });
 
-// Rotas de perfis (padronizadas para /api/perfil)
+
+/* ==============================
+   ROTAS DE PERFIL
+================================*/
+
 router.get('/api/perfil', async (req, res, next) => {
   try {
     const { text } = req.query;
@@ -183,7 +213,6 @@ router.put('/api/perfil/:id', async (req, res, next) => {
     const { id } = req.params;
     const perfilData = req.body;
     const atualizado = await Perfil.update(id, perfilData);
-    console.log('Atualizado', atualizado);
     res.json(atualizado);
   } catch (error) {
     next(error);
@@ -191,28 +220,29 @@ router.put('/api/perfil/:id', async (req, res, next) => {
 });
 
 
+/* ==============================
+   ROTAS DE USUÁRIO
+================================*/
+
 // Cadastro
 router.post('/cadastro', async (req, res, next) => {
   try {
-    const {nome, email, senha, instituicao, telefone} = req.body;
+    const { nome, email, senha, instituicao, telefone } = req.body;
     const criado = await Usuario.create({ nome, email, senha, instituicao, telefone });
-    console.log(nome)
     res.status(201).json(criado);
   } catch (error) {
     next(error);
   }
 });
 
-// Verificação de cadastro de usuário
+// Verificação de cadastro
 router.post('/verificar-cadastro', async (req, res, next) => {
   try {
     const { email } = req.body;
     const resultado = await Usuario.verificarCadastro(email);
     if (resultado.cadastrado) {
-      // Usuário já cadastrado, informar para redirecionar para login
       res.status(200).json({ redirect: '/login', message: 'Usuário já cadastrado. Redirecionando para login.' });
     } else {
-      // Usuário não cadastrado, pode prosseguir com cadastro
       res.status(200).json({ redirect: null, message: 'Usuário não cadastrado. Pode prosseguir com cadastro.' });
     }
   } catch (error) {
@@ -220,11 +250,10 @@ router.post('/verificar-cadastro', async (req, res, next) => {
   }
 });
 
-// Rota de login
-router.post('/login', async (req, res, next) => {
+// Login
+router.post('/login', async (req, res) => {
   try {
     const { email, senha } = req.body;
-    // Consulta o usuário no banco de dados usando Prisma
     const usuario = await Usuario.login(email, senha);
     if (!usuario) {
       return res.status(401).json({ sucesso: false, mensagem: 'E-mail ou senha incorretos!' });
@@ -235,12 +264,12 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-// Middleware 404
+
+
 router.use((req, res) => {
   res.status(404).json({ message: 'Conteúdo não encontrado!' });
 });
 
-// Middleware de erro
 router.use((err, req, res, next) => {
   res.status(err.code || 500).json({ message: err.message || 'Erro interno no servidor' });
 });

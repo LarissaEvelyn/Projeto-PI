@@ -1,121 +1,192 @@
-<!-- public/atividades.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Search Academy – Atividades</title>
+  <title>Search Academy</title>
+  <link rel="shortcut icon" href="../logo-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="subcategorias-cards.css" />
-  <!-- já usa suas classes de ícone (ex.: voluntariado--icon etc.) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1><span class="Search">Search</span> <span class="Academy">Academy</span></h1>
-    <div class="search-bar">
-      <input id="busca" type="text" placeholder="Qual atividade você procura?" />
+
+<header>
+  <a href="../tela_inicial/tela_inicial.html" class="lobster-regular">
+    <div class="lobster-regular">
+      <span class="Search">Search</span> <span class="Academy">Academy</span>
     </div>
-  </header>
-
-  <div class="category-wrapper">
-    <button class="scroll-btn left" id="btnLeft">&#8249;</button>
-    <div class="category-container" id="categoryContainer"></div>
-    <button class="scroll-btn right" id="btnRight">&#8250;</button>
+  </a>
+  <div class="search-bar">
+    <span class="stash--search-solid"></span>
+    <input id="searchInput" type="text" placeholder="Qual atividade você procura?" />
   </div>
+  <div class="icons">
+    <a href="../perfil/perfil.html">
+      <button class="icon-button"><span class="mingcute--user-4-fill"></span></button>
+    </a>
+    <a href="../notificacoes/notificacoes.html">
+      <button class="icon-button"><span class="mingcute--notification-line"></span></button>
+    </a>
+  </div>
+</header>
 
-  <section class="cards" id="cardsSection"></section>
+<!-- Botão de criar nova categoria -->
+<div class="actions">
+  <button onclick="abrirFormularioCategoria()">+ Nova Categoria</button>
+</div>
 
-  <script>
-    const elCategorias = document.getElementById('categoryContainer');
-    const elCards = document.getElementById('cardsSection');
-    const elBusca = document.getElementById('busca');
+<!-- Categorias -->
+<div class="category-wrapper">
+  <button class="scroll-btn left" onclick="scrollCategories(-1)">&#8249;</button>
+  <div class="category-container" id="categoryContainer"></div>
+  <button class="scroll-btn right" onclick="scrollCategories(1)">&#8250;</button>
+</div>
 
-    let categorias = [];
-    let atividades = [];
-    let categoriaAtiva = 'todos';
+<!-- Cards -->
+<section class="cards" id="cardsContainer"></section>
 
-    // Carregar dados do backend (seeded via Prisma)
-    async function carregar() {
-      const [catsRes, actsRes] = await Promise.all([
-        fetch('/api/categorias'),
-        fetch('/api/atividades'),
-      ]);
-      categorias = await catsRes.json();
-      atividades = await actsRes.json();
-      desenharCategorias();
-      desenharCards();
+<!-- Overlay e Formulário de nova categoria -->
+<div id="overlay" onclick="fecharFormularioCategoria()"></div>
+<div id="novaCategoriaForm">
+  <h2>Nova Categoria</h2>
+  <input type="text" id="nomeCategoria" placeholder="Nome da categoria" required />
+  <textarea id="descricaoCategoria" placeholder="Descrição"></textarea>
+  <button onclick="criarCategoria()">Salvar</button>
+  <button onclick="fecharFormularioCategoria()" class="cancel">Cancelar</button>
+</div>
+
+<script>
+  const API_BASE = "http://localhost:3000";
+
+  // ⚡ Busca categorias e atividades da API (suas rotas Node + Prisma)
+  async function fetchData() {
+    const [categoriasRes, atividadesRes] = await Promise.all([
+      fetch("/api/categorias"),   // rota que retorna extracurriculares
+      fetch("/api/atividades")   // rota que retorna atividades
+    ]);
+    const categorias = await categoriasRes.json();
+    const atividades = await atividadesRes.json();
+    return { categorias, atividades };
+  }
+
+  // Renderizar categorias
+  function renderCategorias(categorias, atividades) {
+    const container = document.getElementById("categoryContainer");
+    container.innerHTML = "";
+
+    categorias.forEach(cat => {
+      const div = document.createElement("div");
+      div.className = "category";
+      div.innerHTML = `<span class="${cat.iconClass}"></span><span>${cat.nome}</span>`;
+      div.onclick = () => renderCards(atividades.filter(a => a.extracurricularId === cat.id));
+      container.appendChild(div);
+    });
+  }
+
+  // Renderizar cards
+  function renderCards(atividades) {
+    const container = document.getElementById("cardsContainer");
+    container.innerHTML = "";
+
+    if (atividades.length === 0) {
+      container.innerHTML = `<p style="grid-column:1/-1;text-align:center">Nenhuma atividade encontrada.</p>`;
+      return;
     }
 
-    // Renderiza todas as categorias numa única página
-    function desenharCategorias() {
-      elCategorias.innerHTML = '';
+    atividades.forEach(atividade => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${atividade.imagem || '/images/default.jpg'}" alt="${atividade.titulo}" />
+        <div class="card-content">
+          <div class="card-title">${atividade.titulo}</div>
+          <div class="card-description">${atividade.descricao}</div>
+        </div>
+        <button onclick="window.open('${atividade.url || '#'}','_blank')">SAIBA MAIS!</button>
+      `;
+      container.appendChild(card);
+    });
+  }
 
-      // Botão "Todos"
-      const btnTodos = document.createElement('div');
-      btnTodos.className = `category ${categoriaAtiva === 'todos' ? 'active' : ''}`;
-      btnTodos.dataset.slug = 'todos';
-      btnTodos.innerHTML = `<span class="stash--search-solid"></span><span>Todos</span>`;
-      btnTodos.addEventListener('click', () => selecionarCategoria('todos'));
-      elCategorias.appendChild(btnTodos);
+  // Filtro de busca
+  function setupSearch(atividades) {
+    const input = document.getElementById("searchInput");
+    input.addEventListener("input", () => {
+      const termo = input.value.toLowerCase();
+      const filtradas = atividades.filter(a => 
+        a.titulo.toLowerCase().includes(termo) || 
+        a.descricao.toLowerCase().includes(termo)
+      );
+      renderCards(filtradas);
+    });
+  }
 
-      // Demais categorias (do seed)
-      categorias.forEach(c => {
-        const el = document.createElement('div');
-        el.className = `category ${categoriaAtiva === c.slug ? 'active' : ''}`;
-        el.dataset.slug = c.slug;
-        el.innerHTML = `<span class="${c.iconClass}"></span><span>${c.nome}</span>`;
-        el.addEventListener('click', () => selecionarCategoria(c.slug));
-        elCategorias.appendChild(el);
+  // Scroll categorias
+  function scrollCategories(direction) {
+    const container = document.getElementById("categoryContainer");
+    container.scrollBy({ left: direction * 200, behavior: "smooth" });
+  }
+
+  // ---------------------- Cadastro de nova categoria ----------------------
+  function abrirFormularioCategoria() {
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("novaCategoriaForm").style.display = "block";
+  }
+
+  function fecharFormularioCategoria() {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("novaCategoriaForm").style.display = "none";
+  }
+
+  async function criarCategoria() {
+    const nome = document.getElementById("nomeCategoria").value.trim();
+    const descricao = document.getElementById("descricaoCategoria").value.trim();
+
+    if (!nome) {
+      alert("O nome da categoria é obrigatório!");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/categorias`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome, descricao })
       });
 
-      // Scroll setas
-      document.getElementById('btnLeft').onclick  = () => elCategorias.scrollBy({ left: -200, behavior: 'smooth' });
-      document.getElementById('btnRight').onclick = () => elCategorias.scrollBy({ left:  200, behavior: 'smooth' });
+      if (!res.ok) throw new Error("Erro ao salvar categoria");
+
+      const novaCategoria = await res.json();
+
+      fecharFormularioCategoria();
+
+      // Adiciona a nova categoria no topo
+      const container = document.getElementById("categoryContainer");
+      const div = document.createElement("div");
+      div.className = "category";
+      div.innerHTML = `<span>${novaCategoria.nome}</span>`;
+      div.onclick = () => renderCards([]);
+      container.prepend(div);
+
+      document.getElementById("nomeCategoria").value = "";
+      document.getElementById("descricaoCategoria").value = "";
+
+    } catch (error) {
+      console.error("Erro ao criar categoria:", error);
     }
+  }
 
-    // Função de filtro: clicar em categoria -> mostra somente os cards dela
-    function selecionarCategoria(slug) {
-      categoriaAtiva = slug;
-      desenharCategorias(); // atualiza estilo "active"
-      desenharCards();      // re-render com filtro
-    }
+  // Inicializar página
+  (async () => {
+    const { categorias, atividades } = await fetchData();
+    renderCategorias(categorias, atividades);
+    renderCards(atividades); // mostra tudo no início
+    setupSearch(atividades);
+  })();
+</script>
 
-    // Busca por texto (título/descrição)
-    elBusca.addEventListener('input', desenharCards);
-
-    // Renderiza os cards com base na categoria ativa + busca
-    function desenharCards() {
-      const termo = elBusca.value?.toLowerCase().trim() || '';
-      elCards.innerHTML = '';
-
-      const filtradas = atividades.filter(a => {
-        const condCat = categoriaAtiva === 'todos' || a.categoria?.slug === categoriaAtiva;
-        const condTxt = !termo ||
-          a.titulo.toLowerCase().includes(termo) ||
-          a.descricao.toLowerCase().includes(termo);
-        return condCat && condTxt;
-      });
-
-      if (filtradas.length === 0) {
-        elCards.innerHTML = `<p style="padding:1rem;opacity:.7">Nenhuma atividade encontrada.</p>`;
-        return;
-      }
-
-      filtradas.forEach(a => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <img src="${a.imagem || '/placeholder.jpg'}" alt="${a.titulo}" />
-          <div class="card-content">
-            <div class="card-title">${a.titulo}</div>
-            <div class="card-description">${a.descricao}</div>
-          </div>
-          <button ${a.url ? `onclick="window.open('${a.url}','_blank')"` : ''}>SAIBA MAIS!</button>
-        `;
-        elCards.appendChild(card);
-      });
-    }
-
-    carregar();
-  </script>
 </body>
 </html>
