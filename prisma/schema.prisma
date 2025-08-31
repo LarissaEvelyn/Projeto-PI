@@ -8,44 +8,46 @@ datasource db {
 }
 
 model Estudante {
-  Cod_estudante Int     @id @default(autoincrement())
+  Cod_estudante Int           @id @default(autoincrement())
   Nome          String?
   Email         String?
   Senha         String?
   Instituicao   String?
   Telefone      String?
-
-  Curtido Curtido[]
+  notificacoes  Notificacao[]
+  Curtido       Curtido[]
 }
 
 model Extracurriculares {
-  id         Int         @id @default(autoincrement())
-  nome       String
-  descricao  String?
-  slug       String      @unique
-  iconClass  String      // classe CSS do ícone (ex.: "voluntariado--icon")
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  id        Int      @id @default(autoincrement())
+  nome      String
+  descricao String?
+  slug      String   @unique
+  iconClass String // classe CSS do ícone (ex.: "voluntariado--icon")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   atividades Atividade[]
 }
 
 model Atividade {
-  id                  Int               @id @default(autoincrement())
-  titulo              String
-  descricao           String
-  imagem              String?          // caminho do card (opcional)
-  url                 String?          // link "saiba mais"
-  extracurricularId   Int
-  extracurricular     Extracurriculares @relation(fields: [extracurricularId], references: [id])
-  createdAt           DateTime          @default(now())
-  updatedAt           DateTime          @updatedAt
+  id                Int               @id @default(autoincrement())
+  titulo            String
+  descricao         String
+  imagem            String? // caminho do card (opcional)
+  url               String? // link "saiba mais"
+  extracurricularId Int
+  extracurricular   Extracurriculares @relation(fields: [extracurricularId], references: [id])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
 }
 
 model Notificacao {
-  Cod          Int      @id @default(autoincrement())
-  Descricao    String?
-  Data_emissao DateTime?
+  Cod                    Int        @id @default(autoincrement())
+  Descricao              String?
+  Data_emissao           DateTime?
+  Estudante              Estudante? @relation(fields: [estudanteCod_estudante], references: [Cod_estudante])
+  estudanteCod_estudante Int?
 }
 
 model Professor {
