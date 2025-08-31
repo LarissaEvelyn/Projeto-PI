@@ -1,6 +1,7 @@
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import pkg from '@prisma/client';
+import Usuario from '../src/models/usuarios_models.js'; 
 const { PrismaClient } = pkg;
 
 const prisma = new PrismaClient();
@@ -8,10 +9,9 @@ const prisma = new PrismaClient();
 async function main() {
   const file = resolve('prisma', 'seeders.json');
   const seed = JSON.parse(readFileSync(file, 'utf-8'));
-
-  await prisma.estudante.createMany({
-    data: seed.perfis,
-  });
+  for (const user of seed.perfis) {
+    await Usuario.create(user);
+  }
 
   await prisma.notificacao.createMany({
     data: seed.notifications,

@@ -13,7 +13,7 @@ datasource db {
 model Estudante {
   Cod_estudante Int     @id @default(autoincrement())
   Nome          String?
-  Email         String?
+  Email         String? @unique
   Senha         String?
   Instituicao   String?
   Telefone      String?

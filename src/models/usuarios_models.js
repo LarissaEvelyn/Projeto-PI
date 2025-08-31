@@ -1,20 +1,20 @@
 // ✅ usuarios_models.js
 import prisma from '../database/database.js';
+import bcrypt from 'bcrypt';
 
-// ...existing code...
 
+const saltRounds = Number(process.env.BCRYPT_SALT) || 10;
 async function login(email, senha) {
   const usuario = await prisma.estudante.findFirst({
     where: { Email: email },
   });
-  if (!usuario || usuario.Senha !== senha) {
+  if (!usuario || ! await bcrypt.compare(senha, usuario.Senha)) {
     return null;
   }
   const { Senha, ...usuarioSemSenha } = usuario;
   return usuarioSemSenha;
 }
 
-// ...existing code...
 
 export default { login, logout, getPerfil, create, verificarCadastro };
 function logout() {
@@ -28,6 +28,7 @@ function getPerfil() {
 }
 
 async function create({ nome, email, senha, instituicao, telefone }) {
+  senha = await bcrypt.hash(senha, saltRounds);
   const estudante = await prisma.estudante.create({
     data: {
       Nome: nome,

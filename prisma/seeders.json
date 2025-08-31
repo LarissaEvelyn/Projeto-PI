@@ -17,11 +17,11 @@
   ],
   "perfis": [
     {
-      "Nome": "João Silva",
-      "Email": "joao@email.com",
-      "Senha": "senha123",
-      "Instituicao": "Universidade X",
-      "Telefone": "11999999999"
+      "nome": "João Silva",
+      "email": "joao@email.com",
+      "senha": "senha123",
+      "instituicao": "Universidade X",
+      "telefone": "11999999999"
     }
   ]
 }
