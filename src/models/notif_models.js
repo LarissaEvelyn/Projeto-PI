@@ -1,46 +1,46 @@
-// ✅ notif_models.js
-import { notifications } from '../database/database.js';
+// notif_models.js
+import prisma from '../database/database.js';
 
-function create({ text, photo = 'person.jpeg', unread = true }) {
+// Criar notificação
+async function create({ text, photo = 'person.jpeg', unread = true }) {
   if (!text) throw new Error('Texto da notificação é obrigatório');
 
-  const nova = {
-    id: uuidv4(),
-    text,
-    photo,
-    unread,
-    createdAt: Date.now(),
-  };
+  const nova = await prisma.notificacao.create({
+    data: { text, photo, unread, createdAt: new Date() },
+  });
 
-  notifications.push(nova);
   return nova;
 }
 
-function read(campo, valor) {
-  if (!campo || !valor) return notifications;
-  return notifications.filter(n => n[campo]?.includes(valor));
+// Ler notificações (com filtro opcional)
+async function read(campo, valor) {
+  if (!campo || !valor) {
+    return await prisma.notificacao.findMany();
+  }
+  return await prisma.notificacao.findMany({
+    where: { [campo]: { contains: valor } },
+  });
 }
 
-function readById(id) {
-  const n = notifications.find(n => n.id === id);
+// Buscar por ID
+async function readById(id) {
+  const n = await prisma.notificacao.findUnique({ where: { id } });
   if (!n) throw new Error('Notificação não encontrada');
   return n;
 }
 
-function update({ id, ...dados }) {
-  const index = notifications.findIndex(n => n.id === id);
-  if (index === -1) throw new Error('Notificação não encontrada');
-
-  notifications[index] = { ...notifications[index], ...dados };
-  return notifications[index];
+// Atualizar notificação
+async function update({ id, ...dados }) {
+  const n = await prisma.notificacao.update({
+    where: { id },
+    data: dados,
+  });
+  return n;
 }
 
-function remove(id) {
-  const index = notifications.findIndex(n => n.id === id);
-  if (index === -1) throw new Error('Notificação não encontrada');
-  notifications.splice(index, 1);
+// Remover notificação
+async function remove(id) {
+  await prisma.notificacao.delete({ where: { id } });
 }
 
 export default { create, read, readById, update, remove };
-
-

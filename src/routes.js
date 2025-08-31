@@ -224,22 +224,14 @@ router.post('/verificar-cadastro', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
   try {
     const { email, senha } = req.body;
-    // Consulta o usuário no banco de dados
-    const db = await Database.connect(); // ou Database.connect(), dependendo do seu model
-    const sql = `SELECT * FROM Estudante WHERE email = ?`;
-    const usuario = await db.get(sql, [email]);
-
-    if (!usuario || usuario.senha !== senha) {
-      return res.status(401).json({ message: 'E-mail ou senha incorretos!' });
+    // Consulta o usuário no banco de dados usando Prisma
+    const usuario = await Usuario.login(email, senha);
+    if (!usuario) {
+      return res.status(401).json({ sucesso: false, mensagem: 'E-mail ou senha incorretos!' });
     }
-
-    // Não envie a senha para o frontend
-    const { senha: _, ...usuarioSemSenha } = usuario;
-    // Aqui você pode salvar sessão/cookie se quiser
-
-    res.status(200).json({ message: 'Login bem-sucedido!', usuario: usuarioSemSenha });
+    res.status(200).json({ sucesso: true, usuario });
   } catch (error) {
-    next(error);
+    res.status(401).json({ sucesso: false, mensagem: error.message || 'E-mail ou senha incorretos!' });
   }
 });
 
