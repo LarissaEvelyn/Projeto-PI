@@ -1,3 +1,5 @@
+
+
 body {
   font-family: "Raleway", sans-serif;
   font-optical-sizing: auto;
@@ -7,11 +9,13 @@ body {
   margin: 0px;
 }
 
+
 .lobster-regular {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
 }
+
 
 header {
   display: flex;
@@ -22,16 +26,19 @@ header {
   gap: 20px;
 }
 
+
 .header-right {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
+
 .logo {
   font-size: 24px;
   font-weight: bold;
 }
+
 
 .search-bar {
   display: flex;
@@ -42,6 +49,7 @@ header {
   width: 300px;
 }
 
+
 .search-bar input {
   border: none;
   outline: none;
@@ -49,12 +57,14 @@ header {
   margin-left: 5px;
 }
 
+
 .icons {
   background: transparent;
   display: flex;
   gap: 15px;
   justify-content: center;
 }
+
 
 .icon-button {
   background: transparent;
@@ -65,9 +75,11 @@ header {
   transition: transform 0.2s;
 }
 
+
 .icon-button:hover {
   transform: scale(1.2);
 }
+
 
 .mingcute--notification-line {
   display: inline-block;
@@ -78,6 +90,7 @@ header {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z'/%3E%3Cpath fill='%23fedd1b' d='M5 9a7 7 0 0 1 14 0v3.764l1.822 3.644A1.1 1.1 0 0 1 19.838 18h-3.964a4.002 4.002 0 0 1-7.748 0H4.162a1.1 1.1 0 0 1-.984-1.592L5 12.764zm5.268 9a2 2 0 0 0 3.464 0zM12 4a5 5 0 0 0-5 5v3.764a2 2 0 0 1-.211.894L5.619 16h12.763l-1.17-2.342a2 2 0 0 1-.212-.894V9a5 5 0 0 0-5-5'/%3E%3C/g%3E%3C/svg%3E");
 }
 
+
 .stash--search-solid {
   display: inline-block;
   width: 20px;
@@ -87,6 +100,7 @@ header {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23817c7c' fill-rule='evenodd' d='M10.44 2.75a7.69 7.69 0 1 0 4.615 13.842c.058.17.154.329.29.464l3.84 3.84a1.21 1.21 0 0 0 1.71-1.712l-3.84-3.84a1.2 1.2 0 0 0-.463-.289A7.69 7.69 0 0 0 10.44 2.75m-5.75 7.69a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0' clip-rule='evenodd'/%3E%3C/svg%3E");
 }
 
+
 .lobster-regular {
   font-family: "Lobster", sans-serif;
   font-weight: 400;
@@ -94,13 +108,16 @@ header {
   font-size: 24px;
 }
 
+
 .Search {
   color: #0097b2;
 }
 
+
 .Academy {
   color: #000;
 }
+
 
 .container {
   padding: 20px;
@@ -108,6 +125,7 @@ header {
   max-width: 800px;
   margin: 0 auto;
 }
+
 
 .feed {
   background: rgba(255, 255, 255, 0.15);
@@ -119,12 +137,14 @@ header {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+
 .header h2 {
   font-size: 2.2rem;
   font-weight: 800;
   text-align: center;
   margin-bottom: 30px;
 }
+
 
 .post {
   background-color: #e6e6e6;
@@ -136,10 +156,12 @@ header {
   color: #333;
 }
 
+
 .post:hover {
   background-color: #d8d8d8;
   transform: scale(1.01);
 }
+
 
 .username {
   font-weight: bold;
@@ -147,11 +169,13 @@ header {
   font-size: 1.1rem;
 }
 
+
 .timestamp {
   float: right;
   font-size: 0.9rem;
   color: #666;
 }
+
 
 .post-content {
   margin: 12px 0;
@@ -160,11 +184,13 @@ header {
   line-height: 1.4;
 }
 
+
 .actions {
   display: flex;
   gap: 12px;
   margin-top: 15px;
 }
+
 
 .actions button {
   padding: 8px 16px;
@@ -176,9 +202,11 @@ header {
   transition: background-color 0.3s;
 }
 
+
 .actions button:hover {
   background-color: #5cb3e6;
 }
+
 
 button {
   padding: 8px 16px;
@@ -192,9 +220,11 @@ button {
   transition: background-color 0.3s ease;
 }
 
+
 button:hover {
   background-color: #add8e6;
 }
+
 
 textarea {
     resize: none; /* impede que o usuário redimensione */
@@ -207,6 +237,7 @@ textarea {
     border: 1px solid #aaa5a5;
 }
 
+
 .profile-pic.small img {
   width: 40px;
   height: 40px;
@@ -216,6 +247,7 @@ textarea {
   cursor: pointer;
 }
 
+
 .profile-pic {
   flex-shrink: 0;
   display: flex;
@@ -223,6 +255,7 @@ textarea {
   align-items: center;
   gap: 10px;
 }
+
 
 .search-bar .profile-pic img {
   width: 40px;
@@ -233,25 +266,35 @@ textarea {
   object-fit: cover;
 }
 
+
 /* Like com coração */
 .curtir.liked i,
 .bi-heart-fill {
   color: #ff2d75 !important;
 }
 
+
 /* Contador de likes */
 .like-group {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
+
+
+.curtir {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
 
 .likes-count {
-  font-size: 0.95rem;
-  color: #444;
+    font-size: 0.95rem;
+    color: #444;
 }
 
-.likes-count.liked {
-  color: #ff2d75;
-  font-weight: 500;
-}
+
