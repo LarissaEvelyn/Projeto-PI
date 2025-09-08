@@ -1,4 +1,9 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+
+import { isAuthenticated } from './middleware/auth.js';
+
 import Notificacao from './models/notif_models.js';
 import Postagens from './models/post_models.js';
 import Perfil from './models/perfil_models.js';
@@ -34,6 +39,8 @@ router.get('/home', (req, res) => {
 router.get('/perfil', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/perfil/perfil.html'));
 });
+
+
 
 
 /* ==============================
@@ -254,24 +261,45 @@ router.post('/verificar-cadastro', async (req, res, next) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, senha } = req.body;
-    const usuario = await Usuario.login(email, senha);
+        const usuario = await Usuario.login(email, senha);
     if (!usuario) {
       return res.status(401).json({ sucesso: false, mensagem: 'E-mail ou senha incorretos!' });
     }
     res.status(200).json({ sucesso: true, usuario });
+
+    const { id: userId, password: hash } = await User.read({ email });
+    const match = await bcrypt.compare(password, hash);
+
+    if (match) {
+      const token = jwt.sign(
+        { userId },
+        process.env.JWT_SECRET,
+        { expiresIn: 3600000 } // 1h
+      );
+
+      return res.json({ auth: true, token });
+    } else {
+      throw new Error('User not found');
+    }
   } catch (error) {
-    res.status(401).json({ sucesso: false, mensagem: error.message || 'E-mail ou senha incorretos!' });
+    res.status(401).json({ error: 'User not found' });
+  }
+});  
+
+// 404 handler
+router.use((req, res, next) => {
+  return res.status(404).json({ message: 'Content not found!' });
+});
+
+// Error handler
+router.use((err, req, res, next) => {
+  // console.error(err.stack);
+  if (err instanceof HTTPError) {
+    return res.status(err.code).json({ message: err.message });
+  } else {
+    return res.status(500).json({ message: 'Something broke!' });
   }
 });
 
-
-
-router.use((req, res) => {
-  res.status(404).json({ message: 'Conteúdo não encontrado!' });
-});
-
-router.use((err, req, res, next) => {
-  res.status(err.code || 500).json({ message: err.message || 'Erro interno no servidor' });
-});
 
 export default router;
